@@ -9,8 +9,8 @@ public class Player : MonoBehaviour
     public float trapPlacementRadius = 2.0f;
     public float holdToIncreaseTrapTime = 2f;
     
-    // New variable for trapMaterials
-    public int trapMaterials = 0;
+    // New variable for trapMaterial
+    private int trapMaterial = 0;
     
     public GameObject trapPrefab;
     public GameObject previewTrapPrefab;
@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        trapMaterials = 12;
+        trapMaterial = 12;
     }
 
     void Update()
@@ -67,22 +67,22 @@ public class Player : MonoBehaviour
 
             if (timeHoldingIncreaseKey >= holdToIncreaseTrapTime)
             {
-                // Check if there are enough trapMaterials to craft a trap
-                if (trapMaterials >= 3)
+                // Check if there are enough trapMaterial to craft a trap
+                if (trapMaterial >= 3)
                 {
                     trapNumber++;
                     Debug.Log("Trap number increased to " + trapNumber);
 
-                    // Decrease trapMaterials by 3
-                    trapMaterials -= 3;
+                    // Decrease trapMaterial by 3
+                    trapMaterial -= 3;
 
-                    Debug.Log("trapMaterials remaining: " + trapMaterials);
+                    Debug.Log("trapMaterial remaining: " + trapMaterial);
 
                     timeHoldingIncreaseKey = 0f;
                 }
                 else
                 {
-                    Debug.Log("Not enough trapMaterials to craft a trap!");
+                    Debug.Log("Not enough trapMaterial to craft a trap!");
                 }
             }
         }
@@ -138,5 +138,10 @@ public class Player : MonoBehaviour
                 Debug.Log("Not enough traps!");
             }
         }
+    }
+
+    public void CollectMaterial(){
+        trapMaterial++;
+        Debug.Log("Trap material: " + trapMaterial);
     }
 }
