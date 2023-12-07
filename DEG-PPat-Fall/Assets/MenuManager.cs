@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MenuControl : MonoBehaviour
+public class MenuManager : MonoBehaviour
 {
+
+    void Start()
+    {
+        
+    }
     public void Menu()
     {
         SceneManager.LoadScene("Menu");
