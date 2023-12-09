@@ -98,6 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f05ef1c36bab73a40a1312fb5e3c697a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickupRange: 2
+  trapSetupPanelPrefab: {fileID: 783336311763434048, guid: 8f9d0f4a6f2ea0341916da8d85baf90e, type: 3}
 --- !u!60 &1675556963851606828
 PolygonCollider2D:
   m_ObjectHideFlags: 0
