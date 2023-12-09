@@ -1,32 +1,31 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Trap : MonoBehaviour
 {
-    public float pickupRange = 2f;
+    public float pickupRange;
     public GameObject trapSetupPanelPrefab;
+
+    private bool isSetup;
+
+    private void Start() {
+        pickupRange = 2f;
+        isSetup = false;
+    }
 
     private void OnMouseDown()
     {
-        // Check if the left mouse button is pressed
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !isSetup)
         {
-            // Find the Player object in the scene
             GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
 
-            // Check if the Player object is found
             if (playerObject != null)
             {
-                // Get the Player script from the Player object
                 Player playerScript = playerObject.GetComponent<Player>();
 
-                // Check if the Player script is found
                 if (playerScript != null)
                 {
-                    // Check if the player is within the pickup range
                     if (IsPlayerWithinPickupRange(playerObject.transform.position))
                     {
-                        // Show the trap setup panel
                         ShowTrapSetupPanel();
                     }
                     else
@@ -43,29 +42,42 @@ public class Trap : MonoBehaviour
             {
                 Debug.LogError("Player object not found in the scene.");
             }
+        } 
+        else 
+        {
+            Debug.Log("Trap is already setup.");
         }
     }
 
     private bool IsPlayerWithinPickupRange(Vector3 playerPosition)
     {
-        // Check the distance between the player and the trap
         float distance = Vector2.Distance(playerPosition, transform.position);
-
-        // Check if the player is within the pickup range
         return distance <= pickupRange;
     }
 
     private void ShowTrapSetupPanel()
     {
-        // Check if the trapSetupPanelPrefab is assigned
         if (trapSetupPanelPrefab != null)
         {
             GameObject canvas = GameObject.Find("Canvas");
-            if(canvas != null){
-                GameObject trapSetupPanel = Instantiate(trapSetupPanelPrefab, canvas.transform.position, Quaternion.identity);
-                trapSetupPanel.transform.SetParent(canvas.transform);
-                Debug.Log("Showing trap setup panel.");
-            } else {
+            if (canvas != null)
+            {
+                // Instantiate a unique panel for each trap
+                GameObject trapSetupPanel = Instantiate(trapSetupPanelPrefab, canvas.transform);
+
+                // Pass a reference to the trap to the panel
+                TrapSetupPanel panelScript = trapSetupPanel.GetComponent<TrapSetupPanel>();
+                if (panelScript != null)
+                {
+                    panelScript.SetTrapReference(this);
+                }
+                else
+                {
+                    Debug.LogError("TrapSetupPanel script not found on the panel prefab.");
+                }
+            }
+            else
+            {
                 Debug.LogError("Canvas not found in the scene.");
             }
         }
@@ -73,5 +85,10 @@ public class Trap : MonoBehaviour
         {
             Debug.LogError("Trap setup panel prefab is not assigned in the inspector.");
         }
+    }
+
+    public void SetTrap()
+    {
+        isSetup = true;
     }
 }
