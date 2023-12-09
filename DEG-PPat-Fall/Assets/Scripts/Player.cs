@@ -2,29 +2,40 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float speed = 5f;
-    public float sprintSpeed = 10f;
-    public float stamina = 100f;
-    public float sprintCost = 10f;
-    public float trapPlacementRadius = 2.0f;
-    public float holdToIncreaseTrapTime = 2f;
+    public float speed;
+    public float sprintSpeed;
+    public float stamina;
+    public float sprintCost;
+    public float trapPlacementRadius;
+    public float holdToIncreaseTrapTime;
     
     // New variable for trapMaterial
-    private int trapMaterial = 0;
+    private int trapMaterial;
     
     public GameObject trapPrefab;
     public GameObject previewTrapPrefab;
 
     private Rigidbody2D rb;
-    private bool isPlacingTrap = false;
-    private bool isHoldingIncreaseKey = false;
-    private float timeHoldingIncreaseKey = 0f;
-    private int trapNumber = 0;
+    private bool isPlacingTrap;
+    private bool isHoldingIncreaseKey;
+    private float timeHoldingIncreaseKey;
+    private int trapNumber;
     private GameObject previewTrap;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sprintSpeed = 10f;
+        speed = 5f;
+        stamina = 100f;
+        sprintCost = 10f;
+        trapPlacementRadius = 2.0f;
+        holdToIncreaseTrapTime = 2f;
+        trapMaterial = 0;
+        isPlacingTrap = false;
+        isHoldingIncreaseKey = false;
+        timeHoldingIncreaseKey = 0f;
+        trapNumber = 0;
         trapMaterial = 12;
         trapNumber = 1;
     }
