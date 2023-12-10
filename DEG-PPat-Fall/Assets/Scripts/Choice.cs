@@ -1,15 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.EventSystems;
 
-public class Choice : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class Choice : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     private Canvas canvas;
     private CanvasGroup canvasGroup;
     private RectTransform rectTransform;
     private Vector2 initialPosition; // Store the initial position of the choice
-    private GameObject answerSlot;
+    private AnswerSlot currentAnswerSlot;
+    public string answer;
 
     void Start()
     {
@@ -17,14 +17,41 @@ public class Choice : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEn
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = GetComponent<CanvasGroup>();
         initialPosition = rectTransform.anchoredPosition; // Store the initial position
-        answerSlot = GameObject.Find("AnswerSlot");
+        // Find the child GameObject with TextMeshPro component
+        Transform childTransform = transform.Find("AnswerText"); // Replace "ChildObjectName" with the actual name of your child GameObject
+        if (childTransform != null)
+        {
+            // Get the TextMeshPro component from the child GameObject
+            TextMeshProUGUI textMeshPro = childTransform.GetComponent<TextMeshProUGUI>();
+
+            if (textMeshPro != null)
+            {
+                // Access the text property of the TextMeshPro component
+                answer = textMeshPro.text;
+
+                // Do something with the text
+                Debug.Log("Text: " + answer);
+            }
+            else
+            {
+                Debug.LogWarning("Child GameObject does not have TextMeshPro component.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Child GameObject not found.");
+        }
+    }
+
+    public void SetCurrentAnswerSlot(AnswerSlot answerSlot)
+    {
+        currentAnswerSlot = answerSlot;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            Debug.Log("OnBeginDrag");
             canvasGroup.alpha = .6f;
             canvasGroup.blocksRaycasts = false;
         }
@@ -34,11 +61,9 @@ public class Choice : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEn
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            Debug.Log("OnDrag");
             if (canvas != null)
             {
                 rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
-                Debug.Log("Canvas Exists");
             }
             else
             {
@@ -51,7 +76,6 @@ public class Choice : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEn
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            Debug.Log("OnEndDrag");
             canvasGroup.alpha = 1f;
             canvasGroup.blocksRaycasts = true;
 
@@ -60,26 +84,33 @@ public class Choice : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEn
         }
     }
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        Debug.Log("OnPointerDown");
-    }
-
     private void CheckIfOutsideAnswerSlot()
     {
+        if(currentAnswerSlot == null){
+            rectTransform.anchoredPosition = initialPosition;
+            return;
+        }
+
         // Assuming AnswerSlot has a collider (Collider2D or Collider) for overlap check
-        Collider2D slotCollider = answerSlot.GetComponent<Collider2D>();
+        Collider2D slotCollider = currentAnswerSlot.slotColider;
 
         if (slotCollider != null)
         {
             // Check if the choice is outside the AnswerSlot using the colliders
             if (!slotCollider.OverlapPoint(rectTransform.position))
             {
-                Debug.Log("Choice dragged outside of AnswerSlot");
-
                 // Reset the position of the choice to its initial position
                 rectTransform.anchoredPosition = initialPosition;
+
+                // Remove the reference to the current AnswerSlot
+                if (currentAnswerSlot != null)
+                {
+                    currentAnswerSlot.RemoveChoice();
+                    currentAnswerSlot = null;
+                }
             }
+        } else {
+            rectTransform.anchoredPosition = initialPosition;
         }
     }
 }
