@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -17,9 +18,10 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool isPlacingTrap;
-    private bool isHoldingIncreaseKey;
     private float timeHoldingIncreaseKey;
     private int trapNumber;
+    public List<GameObject> trapSetupPanelPrefabs = new List<GameObject>();
+    private int currentTrapPanelNumber;
     private GameObject previewTrap;
 
     void Start()
@@ -33,11 +35,11 @@ public class Player : MonoBehaviour
         holdToIncreaseTrapTime = 2f;
         trapMaterial = 0;
         isPlacingTrap = false;
-        isHoldingIncreaseKey = false;
         timeHoldingIncreaseKey = 0f;
         trapNumber = 0;
         trapMaterial = 12;
         trapNumber = 1;
+        currentTrapPanelNumber = Random.Range(0, trapSetupPanelPrefabs.Count);
     }
 
     void Update()
@@ -142,7 +144,11 @@ public class Player : MonoBehaviour
                     mousePosition = playerPosition + (mousePosition - playerPosition).normalized * trapPlacementRadius;
                 }
 
-                Instantiate(trapPrefab, mousePosition, Quaternion.identity);
+                GameObject trap = Instantiate(trapPrefab, mousePosition, Quaternion.identity);
+                Trap trapScript = trap.GetComponent<Trap>();
+                trapScript.puzzleNumber = currentTrapPanelNumber;
+                trapScript.trapSetupPanelPrefab = trapSetupPanelPrefabs[currentTrapPanelNumber];
+                currentTrapPanelNumber = Random.Range(0, trapSetupPanelPrefabs.Count);
                 trapNumber--;
             }
             else

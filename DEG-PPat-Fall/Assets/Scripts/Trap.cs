@@ -1,11 +1,14 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
     public float pickupRange;
     public GameObject trapSetupPanelPrefab;
+    public int puzzleNumber;
 
-    private bool isSetup;
+    public bool isSetup;
+    public List<string> answers = new List<string>();
 
     private void Start() {
         pickupRange = 2f;
@@ -46,6 +49,9 @@ public class Trap : MonoBehaviour
         else 
         {
             Debug.Log("Trap is already setup.");
+            foreach(string answer in answers){
+                Debug.Log(answer);
+            }
         }
     }
 
@@ -53,6 +59,25 @@ public class Trap : MonoBehaviour
     {
         float distance = Vector2.Distance(playerPosition, transform.position);
         return distance <= pickupRange;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.tag == "Enemy" && isSetup) {
+            Enemy enemyScript = other.gameObject.GetComponent<Enemy>();
+            int enemyStatus = enemyScript.status;
+            Debug.Log("Stun Calculator" + enemyStatus);
+            PuzzleCalculator puzzleCalculator = GameObject.Find("PuzzleCalculator").GetComponent<PuzzleCalculator>();
+            Debug.Log("Answers: " + answers);
+            Debug.Log("Enemy Status: " + enemyStatus);
+            Debug.Log("Puzzle Number: " + puzzleNumber);
+            // if(puzzleCalculator != null){
+            //     puzzleCalculator.SetControl(answers,enemyStatus,puzzleNumber);
+            // }
+            // else{
+            //     Debug.LogError("PuzzleCalculator script not found on the PuzzleCalculator object.");
+            // }
+            Destroy(this.gameObject);
+        }
     }
 
     private void ShowTrapSetupPanel()
@@ -85,10 +110,5 @@ public class Trap : MonoBehaviour
         {
             Debug.LogError("Trap setup panel prefab is not assigned in the inspector.");
         }
-    }
-
-    public void SetTrap()
-    {
-        isSetup = true;
     }
 }

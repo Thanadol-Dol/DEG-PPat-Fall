@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 783336311763434050}
   - component: {fileID: -5812220420889606333}
   m_Layer: 5
-  m_Name: TrapSetupPanel
+  m_Name: TrapSetupPanel3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -280,7 +280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.96507835, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.92067146, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -309,6 +309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cf1f7a3a037c474892a3b46f0c9547c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  answer: 
 --- !u!225 &8346582620318321654
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -770,7 +771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.07957244, g: 1, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.7583308, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -799,6 +800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cf1f7a3a037c474892a3b46f0c9547c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  answer: 
 --- !u!225 &7774425454633837777
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -877,7 +879,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <
+  m_text: 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1012,7 +1014,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '>'
+  m_text: 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

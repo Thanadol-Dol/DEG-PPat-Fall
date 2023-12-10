@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Material
   - TrapSetupPanel
+  - AnswerSlot
+  - Choice
+  - Enemy
   layers:
   - Default
   - TransparentFX
