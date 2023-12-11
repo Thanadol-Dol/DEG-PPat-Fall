@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class NewGameManager : MonoBehaviour
 {
-    GameManager gameManager;
     
     public void SelectDifficulty(string difficulty)
     {
-        gameManager.difficulty = difficulty;
-        
+        GameManager.Instance.difficulty = difficulty;
+    }
+    
+    public void Start(){
+        Debug.Log(GameManager.Instance.currentTower + " " + GameManager.Instance.currentFloor);
     }
 }
