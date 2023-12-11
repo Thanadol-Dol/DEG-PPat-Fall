@@ -34,6 +34,7 @@ public class Trap : MonoBehaviour
                     if (IsPlayerWithinPickupRange(playerObject.transform.position))
                     {
                         ShowTrapSetupPanel();
+                        playerScript.isTrapPanelOpen = true;
                     }
                     else
                     {

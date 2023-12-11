@@ -256,6 +256,10 @@ MonoBehaviour:
   - {fileID: 783336311763434048, guid: 8f9d0f4a6f2ea0341916da8d85baf90e, type: 3}
   - {fileID: 783336311763434048, guid: 635d4740b815bc247b9bd4f296c258eb, type: 3}
   - {fileID: 783336311763434048, guid: 06e7001ffa804204aaa305688c3899ac, type: 3}
+  isTrapPanelOpen: 0
+  isTipTrickPanelOpen: 0
+  tipTrickPanel: {fileID: 783336311763434048, guid: 83e3652ad5d627a40b135621cb65bf42, type: 3}
+  canvas: {fileID: 0}
 --- !u!70 &21605217
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
