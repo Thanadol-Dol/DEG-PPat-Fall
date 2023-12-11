@@ -75,6 +75,9 @@ public class TrapSetupPanel : MonoBehaviour
             // Interact with the specific trap
             Debug.Log("Setting Trap: " + trap.name);
             GetAllAnswer();
+            foreach(string answer in answers){
+                Debug.Log(answer);
+            }
             trap.answers = answers;
             // Destroy the panel
             Destroy(gameObject);

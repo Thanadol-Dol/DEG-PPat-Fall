@@ -10,7 +10,11 @@ public class Trap : MonoBehaviour
     public bool isSetup;
     public List<string> answers = new List<string>();
 
-    private void Start() {
+    public int stunTime;
+    public int? extraNumber = null;
+
+    private void Start()
+    {
         pickupRange = 2f;
         isSetup = false;
     }
@@ -45,11 +49,12 @@ public class Trap : MonoBehaviour
             {
                 Debug.LogError("Player object not found in the scene.");
             }
-        } 
-        else 
+        }
+        else
         {
             Debug.Log("Trap is already setup.");
-            foreach(string answer in answers){
+            foreach (string answer in answers)
+            {
                 Debug.Log(answer);
             }
         }
@@ -61,8 +66,10 @@ public class Trap : MonoBehaviour
         return distance <= pickupRange;
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.tag == "Enemy" && isSetup) {
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Enemy" && isSetup)
+        {
             Enemy enemyScript = other.gameObject.GetComponent<Enemy>();
             int enemyStatus = enemyScript.status;
             Debug.Log("Stun Calculator" + enemyStatus);
@@ -70,12 +77,15 @@ public class Trap : MonoBehaviour
             Debug.Log("Answers: " + answers);
             Debug.Log("Enemy Status: " + enemyStatus);
             Debug.Log("Puzzle Number: " + puzzleNumber);
-            // if(puzzleCalculator != null){
-            //     puzzleCalculator.SetControl(answers,enemyStatus,puzzleNumber);
-            // }
-            // else{
-            //     Debug.LogError("PuzzleCalculator script not found on the PuzzleCalculator object.");
-            // }
+            if (puzzleCalculator != null)
+            {
+                stunTime = puzzleCalculator.SetControl(answers, enemyStatus, puzzleNumber, extraNumber);
+                Debug.Log("Enemy got stunned for " + stunTime + " second.");
+            }
+            else
+            {
+                Debug.LogError("PuzzleCalculator script not found on the PuzzleCalculator object.");
+            }
             Destroy(this.gameObject);
         }
     }

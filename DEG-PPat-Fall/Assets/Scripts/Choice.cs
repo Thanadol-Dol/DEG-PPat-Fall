@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 public class Choice : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     private Canvas canvas;
-    private CanvasGroup canvasGroup;
+    public CanvasGroup canvasGroup;
     private RectTransform rectTransform;
     private Vector2 initialPosition; // Store the initial position of the choice
     private AnswerSlot currentAnswerSlot;
@@ -16,7 +16,7 @@ public class Choice : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
         rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = GetComponent<CanvasGroup>();
-        initialPosition = rectTransform.anchoredPosition; // Store the initial position
+        initialPosition = rectTransform.position; // Store the initial position
         // Find the child GameObject with TextMeshPro component
         Transform childTransform = transform.Find("AnswerText"); // Replace "ChildObjectName" with the actual name of your child GameObject
         if (childTransform != null)
@@ -87,7 +87,8 @@ public class Choice : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
     private void CheckIfOutsideAnswerSlot()
     {
         if(currentAnswerSlot == null){
-            rectTransform.anchoredPosition = initialPosition;
+            Respawn();
+            Destroy(gameObject);
             return;
         }
 
@@ -100,7 +101,7 @@ public class Choice : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
             if (!slotCollider.OverlapPoint(rectTransform.position))
             {
                 // Reset the position of the choice to its initial position
-                rectTransform.anchoredPosition = initialPosition;
+                Destroy(gameObject);
 
                 // Remove the reference to the current AnswerSlot
                 if (currentAnswerSlot != null)
@@ -110,7 +111,17 @@ public class Choice : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
                 }
             }
         } else {
-            rectTransform.anchoredPosition = initialPosition;
+            Respawn();
+            Destroy(gameObject);
         }
+    }
+
+    public void Respawn()
+    {
+        GameObject spawnObject = Instantiate(gameObject, initialPosition, Quaternion.identity, transform.parent);
+        spawnObject.name = gameObject.name;
+        Choice spawnChoice = spawnObject.GetComponent<Choice>();
+        spawnChoice.canvasGroup.alpha = 1f;
+        spawnChoice.canvasGroup.blocksRaycasts = true;
     }
 }

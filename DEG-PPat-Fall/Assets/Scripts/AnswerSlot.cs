@@ -21,8 +21,10 @@ public class AnswerSlot : MonoBehaviour, IDropHandler
             RectTransform droppedObjectRectTransform = droppedObject.GetComponent<RectTransform>();
             droppedObjectRectTransform.anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
             Choice droppedObjectChoice = droppedObject.GetComponent<Choice>();
-            // Set the current AnswerSlot for the dropped Choice
-            droppedObjectChoice.SetCurrentAnswerSlot(this);
+            if(!isFilled){
+                droppedObjectChoice.Respawn();
+            }
+            droppedObjectChoice.SetCurrentAnswerSlot(this); // Set the current AnswerSlot for the dropped Choice
             isFilled = true;
             answer = droppedObjectChoice.answer;
         }

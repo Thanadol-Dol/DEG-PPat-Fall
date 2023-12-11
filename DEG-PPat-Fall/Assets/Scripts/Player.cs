@@ -148,6 +148,9 @@ public class Player : MonoBehaviour
                 Trap trapScript = trap.GetComponent<Trap>();
                 trapScript.puzzleNumber = currentTrapPanelNumber;
                 trapScript.trapSetupPanelPrefab = trapSetupPanelPrefabs[currentTrapPanelNumber];
+                if(currentTrapPanelNumber>=3 && currentTrapPanelNumber<=8){
+                    trapScript.extraNumber = Random.Range(5, 36);
+                }
                 currentTrapPanelNumber = Random.Range(0, trapSetupPanelPrefabs.Count);
                 trapNumber--;
             }
