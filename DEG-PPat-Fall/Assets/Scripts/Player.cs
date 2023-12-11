@@ -47,6 +47,7 @@ public class Player : MonoBehaviour
         PlayerMovement();
         CraftTrap();
         PlaceTrap();
+        CheckDistanceToTraps();
     }
 
     void PlayerMovement()
@@ -164,5 +165,37 @@ public class Player : MonoBehaviour
     public void CollectMaterial(){
         trapMaterial++;
         Debug.Log("Trap material: " + trapMaterial);
+    }
+
+    void CheckDistanceToTraps()
+    {
+        GameObject[] traps = GameObject.FindGameObjectsWithTag("Trap"); // Assuming traps have the "Trap" tag
+
+        foreach (GameObject trap in traps)
+        {
+            float distance = Vector2.Distance(transform.position, trap.transform.position);
+
+            if (distance > 2f)
+            {
+                // Close panels associated with the trap
+                CloseTrapPanels();
+            }
+        }
+    }
+
+    void CloseTrapPanels()
+    {
+        GameObject[] panels = GameObject.FindGameObjectsWithTag("TrapSetupPanel"); // Assuming trap setup panels have the "TrapSetupPanel" tag
+        GameObject canvas = GameObject.Find("Canvas");
+
+        // Iterate through the found objects
+        foreach (GameObject panel in panels)
+        {
+            // Check if the object is a child of the canvas
+            if (panel.transform.IsChildOf(canvas.transform))
+            {
+                Destroy(panel);
+            }
+        }
     }
 }
