@@ -4,48 +4,125 @@ using UnityEngine;
 
 public class PuzzleCalculator : MonoBehaviour
 {
-    public void SetControl(List<string> answers,int enemyStatus,int trapNumber){
+    public int SetControl(List<string> answers,int enemyStatus,int trapNumber,int? extraNumber = null){
+        int extraNumberValue = 0;
+        if(extraNumber != null){
+            extraNumberValue = extraNumber.Value;
+        }
         switch(trapNumber){
             case 0:
-                string expression = "6"+answers[0]+enemyStatus.ToString();
-                Debug.Log(expression);
-                break;
+                if(CompareCalculate(6,answers[0],enemyStatus)){
+                    return 5;
+                } else {
+                    return 0;
+                }
             case 1:
-                Debug.Log("Trap 2");
-                break;
+                if(CompareCalculate(5,answers[0],enemyStatus)){
+                    return 0;
+                } else {
+                    return 5;
+                }
             case 2:
-                Debug.Log("Trap 3");
-                break;
+                if(CompareCalculate(5,answers[0],enemyStatus)){
+                    return 0;
+                } else if (CompareCalculate(5,answers[1],enemyStatus)){
+                    return 5;
+                } else {
+                    return 0;
+                }
             case 3:
-                Debug.Log("Trap 4");
-                break;
+                if(CompareCalculate(6,answers[0],enemyStatus)){
+                    if(CompareCalculate(6,answers[1],extraNumberValue)){
+                        return 8;
+                    } else {
+                        return 0;
+                    }
+                } else {
+                    return 0;
+                }
             case 4:
-                Debug.Log("Trap 5");
-                break;
+                if(CompareCalculate(5,answers[0],enemyStatus)){
+                    return 0;
+                } else {
+                    if(CompareCalculate(5,answers[1],extraNumberValue)){
+                        return 8;
+                    } else {
+                        return 0;
+                    }
+                }
             case 5:
-                Debug.Log("Trap 6");
-                break;
+                if(CompareCalculate(5,answers[0],enemyStatus)){
+                    return 0;
+                } else if(CompareCalculate(5,answers[1],enemyStatus)){
+                    if(CompareCalculate(5,answers[2],extraNumberValue)){
+                        return 8;
+                    } else {
+                        return 0;
+                    }
+                } else{
+                    return 0;
+                }
             case 6:
-                Debug.Log("Trap 7");
-                break;
+                if(CompareCalculate(6,answers[0],enemyStatus) && CompareCalculate(6,answers[1],extraNumberValue)){
+                    if(CompareCalculate(enemyStatus,answers[2],extraNumberValue)){
+                        return 8;
+                    } else {
+                        return 0;
+                    }
+                } else {
+                    return 0;
+                }
             case 7:
-                Debug.Log("Trap 8");
-                break;
+                if(CompareCalculate(5,answers[0],enemyStatus) && CompareCalculate(5,answers[1],extraNumberValue)){
+                    return 0;
+                } else {
+                    if(CompareCalculate(enemyStatus,answers[2],extraNumberValue)){
+                        return 8;
+                    } else {
+                        return 0;
+                    }
+                }
             case 8:
-                Debug.Log("Trap 9");
-                break;
+                if(CompareCalculate(5,answers[0],enemyStatus) && CompareCalculate(5,answers[1],extraNumberValue)){
+                    return 0;
+                } else if(CompareCalculate(5,answers[2],enemyStatus)){
+                    if(CompareCalculate(enemyStatus,answers[3],extraNumberValue)){
+                        return 8;
+                    } else {
+                        return 0;
+                    }
+                } else {
+                    return 0;
+                }
             case 9:
-                Debug.Log("Trap 10");
-                break;
             case 10:
-                Debug.Log("Trap 11");
-                break;
+                int stunTime1 = enemyStatus - int.Parse(answers[0]);
+                if(stunTime1 < 0){
+                    stunTime1 = 0;
+                }
+                return stunTime1;
             case 11:
-                Debug.Log("Trap 12");
-                break;
-            case 12:
-                Debug.Log("Trap 13");
-                break;
+                int stunTime2 = int.Parse(answers[0]) - enemyStatus - 1;
+                if(stunTime2 < 0){
+                    stunTime2 = 0;
+                }
+                return stunTime2;
+            default:
+                Debug.Log("Invalid trap number");
+                return 0;
+        }
+    }
+
+    public bool CompareCalculate(int num1, string op, int num2){
+        if(op == "=="){
+            return num1 == num2;
+        } else if(op == ">"){
+            return num1 > num2;
+        } else if(op == "<"){
+            return num1 < num2;
+        } else {
+            Debug.Log("Invalid operator");
+            return false;
         }
     }
 }

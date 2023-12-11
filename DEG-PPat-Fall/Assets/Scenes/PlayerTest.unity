@@ -254,8 +254,8 @@ MonoBehaviour:
   previewTrapPrefab: {fileID: 5731228341068790184, guid: 9785acbbe9425be45a0b842317a96315, type: 3}
   trapSetupPanelPrefabs:
   - {fileID: 783336311763434048, guid: 8f9d0f4a6f2ea0341916da8d85baf90e, type: 3}
-  - {fileID: 783336311763434048, guid: 9ed5eeb6f461c0e4e88812cf8470cfec, type: 3}
-  - {fileID: 783336311763434048, guid: 59d19ac239371f04a9ab8302fd163ce3, type: 3}
+  - {fileID: 783336311763434048, guid: 635d4740b815bc247b9bd4f296c258eb, type: 3}
+  - {fileID: 783336311763434048, guid: 06e7001ffa804204aaa305688c3899ac, type: 3}
 --- !u!70 &21605217
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -465,6 +465,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 594500983}
+  - component: {fileID: 594500984}
   m_Layer: 0
   m_Name: PuzzleCalculator
   m_TagString: Untagged
@@ -487,6 +488,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &594500984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594500982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afe31fec4ee667247ad2bd64898832cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &660750005
 PrefabInstance:
   m_ObjectHideFlags: 0
