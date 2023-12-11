@@ -9,6 +9,7 @@ TagManager:
   - AnswerSlot
   - Choice
   - Enemy
+  - Trap
   layers:
   - Default
   - TransparentFX
