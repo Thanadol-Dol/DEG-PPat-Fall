@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class NewGameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    GameManager gameManager;
+    
+    public void SelectDifficulty(string difficulty)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        gameManager.difficulty = difficulty;
         
     }
 }
