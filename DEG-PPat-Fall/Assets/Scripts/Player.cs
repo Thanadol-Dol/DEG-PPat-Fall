@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -9,10 +10,10 @@ public class Player : MonoBehaviour
     public float sprintCost;
     public float trapPlacementRadius;
     public float holdToIncreaseTrapTime;
-    
+
     // New variable for trapMaterial
     private int trapMaterial;
-    
+
     public GameObject trapPrefab;
     public GameObject previewTrapPrefab;
 
@@ -23,6 +24,14 @@ public class Player : MonoBehaviour
     public List<GameObject> trapSetupPanelPrefabs = new List<GameObject>();
     private int currentTrapPanelNumber;
     private GameObject previewTrap;
+
+    public bool isTrapPanelOpen;
+    public bool isTipTrickPanelOpen;
+
+    public GameObject tipTrickPanel;
+    public GameObject canvas;
+    private bool tipTrickPanelCooldown;
+    private float tipTrickPanelCooldownTime; // Adjust the cooldown time as needed
 
     void Start()
     {
@@ -40,6 +49,11 @@ public class Player : MonoBehaviour
         trapMaterial = 12;
         trapNumber = 1;
         currentTrapPanelNumber = Random.Range(0, trapSetupPanelPrefabs.Count);
+        isTrapPanelOpen = false;
+        isTipTrickPanelOpen = false;
+        tipTrickPanelCooldown = false;
+        tipTrickPanelCooldownTime = 0.5f;
+        canvas = GameObject.Find("Canvas");
     }
 
     void Update()
@@ -48,6 +62,7 @@ public class Player : MonoBehaviour
         CraftTrap();
         PlaceTrap();
         CheckDistanceToTraps();
+        ToggleTipTrickPanel();
     }
 
     void PlayerMovement()
@@ -149,7 +164,8 @@ public class Player : MonoBehaviour
                 Trap trapScript = trap.GetComponent<Trap>();
                 trapScript.puzzleNumber = currentTrapPanelNumber;
                 trapScript.trapSetupPanelPrefab = trapSetupPanelPrefabs[currentTrapPanelNumber];
-                if(currentTrapPanelNumber>=3 && currentTrapPanelNumber<=8){
+                if (currentTrapPanelNumber >= 3 && currentTrapPanelNumber <= 8)
+                {
                     trapScript.extraNumber = Random.Range(5, 36);
                 }
                 currentTrapPanelNumber = Random.Range(0, trapSetupPanelPrefabs.Count);
@@ -162,7 +178,8 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void CollectMaterial(){
+    public void CollectMaterial()
+    {
         trapMaterial++;
         Debug.Log("Trap material: " + trapMaterial);
     }
@@ -186,7 +203,6 @@ public class Player : MonoBehaviour
     void CloseTrapPanels()
     {
         GameObject[] panels = GameObject.FindGameObjectsWithTag("TrapSetupPanel"); // Assuming trap setup panels have the "TrapSetupPanel" tag
-        GameObject canvas = GameObject.Find("Canvas");
 
         // Iterate through the found objects
         foreach (GameObject panel in panels)
@@ -194,8 +210,33 @@ public class Player : MonoBehaviour
             // Check if the object is a child of the canvas
             if (panel.transform.IsChildOf(canvas.transform))
             {
+                isTrapPanelOpen = false;
                 Destroy(panel);
             }
         }
+    }
+
+    void ToggleTipTrickPanel()
+    {
+        if (Input.GetKey(KeyCode.T) && !isTrapPanelOpen && canvas != null && !tipTrickPanelCooldown)
+        {
+            if (!isTipTrickPanelOpen)
+            {
+                isTipTrickPanelOpen = true;
+                Instantiate(tipTrickPanel, canvas.transform);
+            }
+            else
+            {
+                GameObject.FindGameObjectWithTag("TipTrickPanel").GetComponent<TipTrick>().CloseTipTrickPanel();
+            }
+            StartCoroutine(TipTrickPanelCooldown());
+        }
+    }
+
+    IEnumerator TipTrickPanelCooldown()
+    {
+        tipTrickPanelCooldown = true;
+        yield return new WaitForSeconds(tipTrickPanelCooldownTime);
+        tipTrickPanelCooldown = false;
     }
 }
