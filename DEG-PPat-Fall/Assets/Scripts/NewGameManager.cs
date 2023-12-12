@@ -12,7 +12,7 @@ public class NewGameManager : MonoBehaviour
     }
     
     public void Start(){
-        Debug.Log("Tower"+ GameManager.Instance.currentTower + "Floor" + GameManager.Instance.currentFloor);
+        Debug.Log("Tower : "+ GameManager.Instance.currentTower + " Floor : " + GameManager.Instance.currentFloor);
     }
 
     public void Menu()

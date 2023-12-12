@@ -19,7 +19,7 @@ public class MenuManager : MonoBehaviour
         quitGameButton.interactable = true;
 
         string currentTower = GameManager.Instance.currentTower;
-        string checkTower = "";
+        string checkTower = "NonSelect";
 
         if (string.Equals(currentTower,checkTower, System.StringComparison.OrdinalIgnoreCase))
         {
