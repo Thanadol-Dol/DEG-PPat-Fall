@@ -5,6 +5,7 @@ using UnityEngine;
 public class PuzzleCalculator : MonoBehaviour
 {
     public int SetControl(List<string> answers,int enemyStatus,int trapNumber,int? extraNumber = null){
+        int stunTime = 0;
         int extraNumberValue = 0;
         if(extraNumber != null){
             extraNumberValue = extraNumber.Value;
@@ -32,8 +33,10 @@ public class PuzzleCalculator : MonoBehaviour
                 }
             case 3:
                 if(CompareCalculate(6,answers[0],enemyStatus)){
+                    stunTime += 5;
                     if(CompareCalculate(6,answers[1],extraNumberValue)){
-                        return 8;
+                        stunTime += 3;
+                        return stunTime;
                     } else {
                         return 0;
                     }
@@ -44,8 +47,10 @@ public class PuzzleCalculator : MonoBehaviour
                 if(CompareCalculate(5,answers[0],enemyStatus)){
                     return 0;
                 } else {
+                    stunTime += 5;
                     if(CompareCalculate(5,answers[1],extraNumberValue)){
-                        return 8;
+                        stunTime += 3;
+                        return stunTime;
                     } else {
                         return 0;
                     }
@@ -54,8 +59,10 @@ public class PuzzleCalculator : MonoBehaviour
                 if(CompareCalculate(5,answers[0],enemyStatus)){
                     return 0;
                 } else if(CompareCalculate(5,answers[1],enemyStatus)){
+                    stunTime += 5;
                     if(CompareCalculate(5,answers[2],extraNumberValue)){
-                        return 8;
+                        stunTime += 3;
+                        return stunTime;
                     } else {
                         return 0;
                     }
@@ -64,8 +71,10 @@ public class PuzzleCalculator : MonoBehaviour
                 }
             case 6:
                 if(CompareCalculate(6,answers[0],enemyStatus) && CompareCalculate(6,answers[1],extraNumberValue)){
+                    stunTime += 5;
                     if(CompareCalculate(enemyStatus,answers[2],extraNumberValue)){
-                        return 8;
+                        stunTime += 3;
+                        return stunTime;
                     } else {
                         return 0;
                     }
@@ -76,8 +85,10 @@ public class PuzzleCalculator : MonoBehaviour
                 if(CompareCalculate(5,answers[0],enemyStatus) && CompareCalculate(5,answers[1],extraNumberValue)){
                     return 0;
                 } else {
+                    stunTime += 5;
                     if(CompareCalculate(enemyStatus,answers[2],extraNumberValue)){
-                        return 8;
+                        stunTime += 3;
+                        return stunTime;
                     } else {
                         return 0;
                     }
@@ -86,8 +97,10 @@ public class PuzzleCalculator : MonoBehaviour
                 if(CompareCalculate(5,answers[0],enemyStatus) && CompareCalculate(5,answers[1],extraNumberValue)){
                     return 0;
                 } else if(CompareCalculate(5,answers[2],enemyStatus)){
+                    stunTime += 5;
                     if(CompareCalculate(enemyStatus,answers[3],extraNumberValue)){
-                        return 8;
+                        stunTime += 3;
+                        return stunTime;
                     } else {
                         return 0;
                     }
@@ -96,17 +109,17 @@ public class PuzzleCalculator : MonoBehaviour
                 }
             case 9:
             case 10:
-                int stunTime1 = enemyStatus - int.Parse(answers[0]);
-                if(stunTime1 < 0){
-                    stunTime1 = 0;
+                stunTime = enemyStatus - int.Parse(answers[0]);
+                if(stunTime < 0){
+                    stunTime = 0;
                 }
-                return stunTime1;
+                return stunTime;
             case 11:
-                int stunTime2 = int.Parse(answers[0]) - enemyStatus - 1;
-                if(stunTime2 < 0){
-                    stunTime2 = 0;
+                stunTime = int.Parse(answers[0]) - enemyStatus - 1;
+                if(stunTime < 0){
+                    stunTime = 0;
                 }
-                return stunTime2;
+                return stunTime;
             default:
                 Debug.Log("Invalid trap number");
                 return 0;
