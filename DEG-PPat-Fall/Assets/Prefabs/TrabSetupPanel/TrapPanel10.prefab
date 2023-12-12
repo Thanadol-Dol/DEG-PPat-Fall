@@ -138,7 +138,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -459.9, y: 178.4}
+  m_AnchoredPosition: {x: -426.5548, y: 166.333}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1484658529425403808
@@ -495,7 +495,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -439.4452, y: 35.587}
+  m_AnchoredPosition: {x: -447, y: 31}
   m_SizeDelta: {x: 551.6674, y: 360.6662}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9126269027769628321
@@ -526,7 +526,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "     int x =         ;\n     while(p\u2019Pat > x){\n             stun(1);\n            
+  m_text: "     int x =        ;\n     while(p\u2019Pat > x){\n             stun(1);\n            
     x++;\n     }"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 725e01a64e59ab34082ee7f921f776c8, type: 2}
@@ -554,8 +554,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 52
-  m_fontSizeBase: 52
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

@@ -141,7 +141,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -487, y: 266}
+  m_AnchoredPosition: {x: -543, y: 276}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1484658529425403808
@@ -260,7 +260,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -462, y: 127}
+  m_AnchoredPosition: {x: -518, y: 132}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8108088713774288100
@@ -482,7 +482,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -384.6151, y: 196}
+  m_AnchoredPosition: {x: -433, y: 210.33}
   m_SizeDelta: {x: 616.0475, y: 360.6662}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9126269027769628321
@@ -513,8 +513,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "     int x = 5;\n     if( x         p\u2019Pat ){\n        do nothing();}\nif
-    else(x         P\u2019pat){\n         stun(5);\n          if(x          y){\n            
+  m_text: "     int x = 5;\n     if( x        p\u2019Pat ){\n        do nothing();}\nif
+    else(x        p\u2019Pat){\n         stun(5);\n          if(x        y){\n            
     stun(3)}\n          else{\n             donothing()}\n     else{\n         do
     nothing()}}}"
   m_isRightToLeft: 0
@@ -555,7 +555,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 5
+  m_lineSpacing: 10
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -1506,7 +1506,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -433.9, y: -16.6}
+  m_AnchoredPosition: {x: -494, y: -15}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5160768589921077172
