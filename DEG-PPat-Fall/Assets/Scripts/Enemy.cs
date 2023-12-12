@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using TMPro;
 
 public class Enemy : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class Enemy : MonoBehaviour
 
     private Rigidbody2D rb;
     public Vector2 stunPosition;
-
+    public TextMeshProUGUI textComponent;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -20,13 +22,22 @@ public class Enemy : MonoBehaviour
         speed = 5f;
         stamina = 100f;
         sprintCost = 10f;
-        status = 10;
+        status = Random.Range(5, 37);
         canMove = true;
     }
 
     void Update()
     {
         EnemyMovement();
+        
+        bool canPlayerSeeEnemyStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().canSeeEnemyStatus;
+        if(canPlayerSeeEnemyStatus)
+        {
+            // Update the text content (replace with your own logic)
+            textComponent.text = status.ToString(); // Example content
+        } else {
+            textComponent.text = "---";
+        }
     }
 
     void EnemyMovement()
@@ -61,6 +72,11 @@ public class Enemy : MonoBehaviour
     public void ApplyStun(int stunTime)
     {
         stunPosition = transform.position;
+        Player playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        if(playerScript.currentLevel != 1)
+        {
+            status = Random.Range(5, 37);
+        }
         StartCoroutine(StunCoroutine(stunTime));
     }
 

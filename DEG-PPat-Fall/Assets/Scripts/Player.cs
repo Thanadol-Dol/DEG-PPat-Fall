@@ -33,6 +33,12 @@ public class Player : MonoBehaviour
     private bool tipTrickPanelCooldown;
     private float tipTrickPanelCooldownTime; // Adjust the cooldown time as needed
 
+    public bool canSeeEnemyStatus;
+    public bool isGrabByEnemy;
+    public string currentTower;
+    public string currentDifficulty;
+    public int currentLevel;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -54,6 +60,11 @@ public class Player : MonoBehaviour
         tipTrickPanelCooldown = false;
         tipTrickPanelCooldownTime = 0.5f;
         canvas = GameObject.Find("Canvas");
+        canSeeEnemyStatus = false;
+        isGrabByEnemy = false;
+        currentTower = "While";
+        currentDifficulty = "Normal";
+        currentLevel = 2;
     }
 
     void Update()
@@ -166,7 +177,7 @@ public class Player : MonoBehaviour
                 trapScript.trapSetupPanelPrefab = trapSetupPanelPrefabs[currentTrapPanelNumber];
                 if (currentTrapPanelNumber >= 3 && currentTrapPanelNumber <= 8)
                 {
-                    trapScript.extraNumber = Random.Range(5, 36);
+                    trapScript.extraNumber = Random.Range(5, 37);
                 }
                 currentTrapPanelNumber = Random.Range(0, trapSetupPanelPrefabs.Count);
                 trapNumber--;
