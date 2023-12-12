@@ -64,4 +64,9 @@ public class MenuManager : MonoBehaviour
     {
         SceneManager.LoadScene("PlayerTest");
     }
+
+    public void Stage1()
+    {
+        SceneManager.LoadScene("Stage1");
+    }
 }

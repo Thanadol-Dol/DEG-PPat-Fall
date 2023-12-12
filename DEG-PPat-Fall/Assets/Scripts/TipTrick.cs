@@ -15,6 +15,7 @@ public class TipTrick : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 0f;
         foreach (string topic in topicList)
         {
             GameObject spawnedTopicButton = Instantiate(topicButtonPrefab, topicTransform);
@@ -47,6 +48,7 @@ public class TipTrick : MonoBehaviour
                 Destroy(panel);
             }
         }
+        Time.timeScale = 1f;
     }
 
     public void OpenContentPanel(string topic)

@@ -12,6 +12,7 @@ public class TrapSetupPanel : MonoBehaviour
     private void Start()
     {
         setupButton.interactable = false;
+        Time.timeScale = 0f;
     }
 
     private void Update()
@@ -56,6 +57,7 @@ public class TrapSetupPanel : MonoBehaviour
     {
         if (trap != null)
         {
+            Time.timeScale = 1f;
             // Interact with the specific trap
             Debug.Log("Closing panel for Trap: " + trap.name);
             GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().isTrapPanelOpen = false;
@@ -72,6 +74,7 @@ public class TrapSetupPanel : MonoBehaviour
     {
         if (trap != null)
         {
+            Time.timeScale = 1f;
             // Interact with the specific trap
             Debug.Log("Setting Trap: " + trap.name);
             GetAllAnswer();

@@ -42,8 +42,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        sprintSpeed = 10f;
-        speed = 5f;
+        sprintSpeed = 6f;
+        speed = 3f;
         stamina = 100f;
         sprintCost = 10f;
         trapPlacementRadius = 2.0f;
@@ -53,14 +53,13 @@ public class Player : MonoBehaviour
         timeHoldingIncreaseKey = 0f;
         trapNumber = 0;
         trapMaterial = 12;
-        trapNumber = 1;
         currentTrapPanelNumber = Random.Range(0, trapSetupPanelPrefabs.Count);
         isTrapPanelOpen = false;
         isTipTrickPanelOpen = false;
         tipTrickPanelCooldown = false;
         tipTrickPanelCooldownTime = 0.5f;
         canvas = GameObject.Find("Canvas");
-        canSeeEnemyStatus = false;
+        canSeeEnemyStatus = true;
         isGrabByEnemy = false;
         currentTower = "While";
         currentDifficulty = "Normal";
@@ -72,7 +71,6 @@ public class Player : MonoBehaviour
         PlayerMovement();
         CraftTrap();
         PlaceTrap();
-        CheckDistanceToTraps();
         ToggleTipTrickPanel();
     }
 
@@ -193,38 +191,6 @@ public class Player : MonoBehaviour
     {
         trapMaterial++;
         Debug.Log("Trap material: " + trapMaterial);
-    }
-
-    void CheckDistanceToTraps()
-    {
-        GameObject[] traps = GameObject.FindGameObjectsWithTag("Trap"); // Assuming traps have the "Trap" tag
-
-        foreach (GameObject trap in traps)
-        {
-            float distance = Vector2.Distance(transform.position, trap.transform.position);
-
-            if (distance > 2f)
-            {
-                // Close panels associated with the trap
-                CloseTrapPanels();
-            }
-        }
-    }
-
-    void CloseTrapPanels()
-    {
-        GameObject[] panels = GameObject.FindGameObjectsWithTag("TrapSetupPanel"); // Assuming trap setup panels have the "TrapSetupPanel" tag
-
-        // Iterate through the found objects
-        foreach (GameObject panel in panels)
-        {
-            // Check if the object is a child of the canvas
-            if (panel.transform.IsChildOf(canvas.transform))
-            {
-                isTrapPanelOpen = false;
-                Destroy(panel);
-            }
-        }
     }
 
     void ToggleTipTrickPanel()

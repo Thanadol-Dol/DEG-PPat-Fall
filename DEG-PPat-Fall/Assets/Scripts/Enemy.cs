@@ -18,8 +18,8 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        sprintSpeed = 10f;
-        speed = 5f;
+        sprintSpeed = 6f;
+        speed = 3f;
         stamina = 100f;
         sprintCost = 10f;
         status = Random.Range(5, 37);
