@@ -1166,7 +1166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5c8278e1a963f3459c9f87a474f03e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTower: 0
+  currentTower: NonSelect
   currentFloor: 0
   difficulty: 
   isCompletedForTower: 0
