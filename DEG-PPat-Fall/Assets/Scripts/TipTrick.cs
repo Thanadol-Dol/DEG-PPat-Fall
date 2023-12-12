@@ -1,32 +1,64 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TipTrick : MonoBehaviour
 {
     public GameObject topicButtonPrefab;
-    public GameObject contentPanelPrefab;
+    public List<GameObject> contentPanelPrefab = new List<GameObject>();
     public Transform topicTransform;
     public Transform contentTransform;
+    public GameObject newContentPanel;
+    public Transform canvasTransform;
     public List<string> topicList = new List<string>();
 
     private void Start()
     {
-        topicList.Add("1");
-        topicList.Add("2");
-        topicList.Add("3");
-
         foreach (string topic in topicList)
         {
-            GameObject topicButton = Instantiate(topicButtonPrefab, topicTransform);
-            GameObject newContentPanel = Instantiate(contentPanelPrefab, contentTransform);
-            topicButton.transform.Find("TopicName").GetComponent<TMPro.TextMeshProUGUI>().text = topic;
+            GameObject spawnedTopicButton = Instantiate(topicButtonPrefab, topicTransform);
+            spawnedTopicButton.transform.Find("TopicName").GetComponent<TMPro.TextMeshProUGUI>().text = topic;
+            Button buttonComponent = spawnedTopicButton.GetComponent<Button>();
+            if (buttonComponent != null)
+            {
+                string topicName = topic;
+                buttonComponent.onClick.AddListener(() => OpenContentPanel(topicName));
+            }
+            else
+            {
+                Debug.LogError("Button Component not found");
+            }
+
         }
+
     }
 
     public void CloseTipTrickPanel()
     {
         GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().isTipTrickPanelOpen = false;
-        Destroy(this.gameObject);
+        GameObject[] panels = GameObject.FindGameObjectsWithTag("TipTrickPanel");
+        Transform canvasTransform = GameObject.Find("Canvas").transform;
+        foreach (GameObject panel in panels)
+        {
+            // Check if the object is a child of the canvas
+            if (panel.transform.IsChildOf(canvasTransform))
+            {
+                Destroy(panel);
+            }
+        }
+    }
+
+    public void OpenContentPanel(string topic)
+    {
+        Debug.Log("OpenContentPanel called");
+        Transform canvasTransform = GameObject.Find("Canvas").transform;
+        if (newContentPanel != null)
+        {
+            Destroy(newContentPanel);
+        }
+        GameObject selectedPanel = contentPanelPrefab.Find(x => x.name == topic);
+        Debug.Log(selectedPanel.name);
+        newContentPanel = Instantiate(selectedPanel, canvasTransform);
     }
 }
