@@ -351,7 +351,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -480.6, y: 180.6}
+  m_AnchoredPosition: {x: -490, y: 175}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1484658529425403808
@@ -740,7 +740,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -69, y: 180.6}
+  m_AnchoredPosition: {x: -106, y: 175}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8108088713774288100
@@ -888,8 +888,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "     int x = 6;\n     if( (x          p\u2019Pat) &&  (x           y)){\n       
-    stun( 5 );\n        if(p'Pat          y){\n        stun(3)}\n         else{\n        
+  m_text: "     int x = 6;\n     if( (x        p\u2019Pat) &&  (x        y)){\n       
+    stun( 5 );\n        if(p'Pat        y){\n        stun(3)}\n         else{\n        
     donothing()\n        }      \n     }"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 725e01a64e59ab34082ee7f921f776c8, type: 2}
@@ -929,7 +929,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 5
+  m_lineSpacing: 10
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -1640,7 +1640,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -381.2, y: 34.744}
+  m_AnchoredPosition: {x: -395.9, y: 27.7}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5160768589921077172

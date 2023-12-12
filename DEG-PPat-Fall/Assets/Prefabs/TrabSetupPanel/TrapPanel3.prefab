@@ -244,7 +244,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -466, y: 175}
+  m_AnchoredPosition: {x: -471, y: 175}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1484658529425403808
@@ -468,7 +468,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -360, y: 11}
+  m_AnchoredPosition: {x: -364, y: 0}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8108088713774288100
@@ -751,8 +751,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "     int x = 5;\n     if( x         p\u2019Pat ){\n        do nothing();}\n    
-    if else(x         p\u2019Pat){\n         stun(5);}\n     else{\n         do nothing()}"
+  m_text: "     int x = 5;\n     if( x        p\u2019Pat ){\n        do nothing();}\n    
+    if else(x        p\u2019Pat){\n         stun(5);}\n     else{\n         do nothing()}"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 725e01a64e59ab34082ee7f921f776c8, type: 2}
   m_sharedMaterial: {fileID: -3502283750471965879, guid: 725e01a64e59ab34082ee7f921f776c8, type: 2}
@@ -791,7 +791,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 5
+  m_lineSpacing: 10
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
