@@ -8,20 +8,20 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 [Serializable]
 public class SavedData{
-    public int currentTower;
+    public string currentTower;
     public int currentFloor;
     public string difficulty;
     public bool isCompletedForTower;
     public bool isCompletedWhileTower;
     public bool isCompletedDoWhileTower;
     public bool isCompletedFinalTower;
-    public bool[,] CompletedFloor;
+    public int currentLevel;
 
 }
 
 public class GameManager : MonoBehaviour
 {
-    public int currentTower;
+    public string currentTower;
     public int currentFloor;
     public string difficulty;
     public bool isCompletedForTower;

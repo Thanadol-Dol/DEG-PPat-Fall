@@ -208,7 +208,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2009458301}
-        m_TargetAssemblyTypeName: MenuControl, Assembly-CSharp
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: setting
         m_Mode: 1
         m_Arguments:
@@ -612,7 +612,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2009458301}
-        m_TargetAssemblyTypeName: MenuControl, Assembly-CSharp
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: quitGame
         m_Mode: 1
         m_Arguments:
@@ -1172,7 +1172,8 @@ MonoBehaviour:
   isCompletedForTower: 0
   isCompletedWhileTower: 0
   isCompletedDoWhileTower: 0
-  isCompletedFimalTower: 0
+  isCompletedFinalTower: 0
+  currentLevel: 0
 --- !u!1 &904903533
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,7 +1259,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2009458301}
-        m_TargetAssemblyTypeName: MenuControl, Assembly-CSharp
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: loadGame
         m_Mode: 1
         m_Arguments:
@@ -1468,8 +1469,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2009458301}
-        m_TargetAssemblyTypeName: MenuControl, Assembly-CSharp
-        m_MethodName: Menu
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: continueGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1602,7 +1603,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2009458301}
-        m_TargetAssemblyTypeName: MenuControl, Assembly-CSharp
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: newGame
         m_Mode: 1
         m_Arguments:
@@ -2002,3 +2003,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3a5efe135d9ff940bd0bfa9ca5eacc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  continueButton: {fileID: 1116999063}
+  newGameButton: {fileID: 1190862220}
+  LoadGameButton: {fileID: 904903535}
+  settingButton: {fileID: 115646195}
+  quitGameButton: {fileID: 217645247}
