@@ -68,7 +68,7 @@ public class Trap : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Enemy" && isSetup)
+        if (other.gameObject.CompareTag("Enemy") && isSetup)
         {
             Enemy enemyScript = other.gameObject.GetComponent<Enemy>();
             int enemyStatus = enemyScript.status;
@@ -80,7 +80,7 @@ public class Trap : MonoBehaviour
             if (puzzleCalculator != null)
             {
                 stunTime = puzzleCalculator.SetControl(answers, enemyStatus, puzzleNumber, extraNumber);
-                Debug.Log("Enemy got stunned for " + stunTime + " second.");
+                enemyScript.ApplyStun(stunTime);
             }
             else
             {
