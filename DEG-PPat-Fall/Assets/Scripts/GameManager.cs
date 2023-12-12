@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public bool isCompletedForTower;
     public bool isCompletedWhileTower;
     public bool isCompletedDoWhileTower;
-    public bool isCompletedFinalTower;
+    public bool isCompletedMasterTower;
     public int currentLevel;
     public bool isIntro;
     public static GameManager Instance;

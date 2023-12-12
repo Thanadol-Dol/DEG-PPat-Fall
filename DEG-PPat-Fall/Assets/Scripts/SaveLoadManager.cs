@@ -15,7 +15,7 @@ public class SavedData{
     public bool isCompletedForTower;
     public bool isCompletedWhileTower;
     public bool isCompletedDoWhileTower;
-    public bool isCompletedFinalTower;
+    public bool isCompletedMasterTower;
     public int currentLevel;
     public bool isIntro;
 
@@ -33,7 +33,7 @@ public class SaveLoadManager : MonoBehaviour
             isCompletedForTower = GameManager.Instance.isCompletedForTower,
             isCompletedWhileTower = GameManager.Instance.isCompletedWhileTower,
             isCompletedDoWhileTower = GameManager.Instance.isCompletedDoWhileTower,
-            isCompletedFinalTower = GameManager.Instance.isCompletedFinalTower,
+            isCompletedMasterTower = GameManager.Instance.isCompletedMasterTower,
             isIntro = GameManager.Instance.isIntro
 
         };
@@ -57,7 +57,7 @@ public class SaveLoadManager : MonoBehaviour
             GameManager.Instance.isCompletedForTower = saveData.isCompletedForTower;
             GameManager.Instance.isCompletedWhileTower = saveData.isCompletedWhileTower;
             GameManager.Instance.isCompletedDoWhileTower = saveData.isCompletedDoWhileTower;
-            GameManager.Instance.isCompletedFinalTower = saveData.isCompletedFinalTower;
+            GameManager.Instance.isCompletedMasterTower = saveData.isCompletedMasterTower;
             GameManager.Instance.isIntro = saveData.isIntro;
         }
     }
