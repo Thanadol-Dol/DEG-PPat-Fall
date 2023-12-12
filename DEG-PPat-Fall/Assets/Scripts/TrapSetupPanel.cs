@@ -58,7 +58,7 @@ public class TrapSetupPanel : MonoBehaviour
         {
             // Interact with the specific trap
             Debug.Log("Closing panel for Trap: " + trap.name);
-
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().isTrapPanelOpen = false;
             // Destroy the panel
             Destroy(gameObject);
         }
@@ -79,6 +79,7 @@ public class TrapSetupPanel : MonoBehaviour
                 Debug.Log(answer);
             }
             trap.answers = answers;
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().isTrapPanelOpen = false;
             // Destroy the panel
             Destroy(gameObject);
             trap.isSetup = true;

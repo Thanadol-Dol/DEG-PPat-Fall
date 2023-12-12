@@ -10,6 +10,7 @@ TagManager:
   - Choice
   - Enemy
   - Trap
+  - TipTrickPanel
   layers:
   - Default
   - TransparentFX
