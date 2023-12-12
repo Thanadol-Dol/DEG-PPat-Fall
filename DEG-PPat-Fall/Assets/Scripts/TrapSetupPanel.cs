@@ -83,6 +83,7 @@ public class TrapSetupPanel : MonoBehaviour
             // Destroy the panel
             Destroy(gameObject);
             trap.isSetup = true;
+            trap.DestroyAfterDelay();
         }
         else
         {

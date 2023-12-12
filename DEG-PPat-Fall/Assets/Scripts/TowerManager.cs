@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class sceneManager : MonoBehaviour
+public class TowerManager : MonoBehaviour
 {
+    
     // Start is called before the first frame update
     void Start()
     {

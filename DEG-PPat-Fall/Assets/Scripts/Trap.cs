@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -121,5 +122,53 @@ public class Trap : MonoBehaviour
         {
             Debug.LogError("Trap setup panel prefab is not assigned in the inspector.");
         }
+    }
+
+    public void DestroyAfterDelay()
+    {
+        float timeToLive = 0f;
+        Player playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        if(playerScript.currentDifficulty.Equals("Beginner")){
+            if(playerScript.currentLevel == 1){
+                return;
+            } else if(playerScript.currentLevel == 2){
+                timeToLive = 12.0f;
+            } else if(playerScript.currentLevel == 3){
+                timeToLive = 10.0f;
+            } else if(playerScript.currentLevel == 4){
+                timeToLive = 10.0f;
+            }
+        } else if(playerScript.currentDifficulty.Equals("Normal")){
+            if(playerScript.currentLevel == 1){
+                return;
+            } else if(playerScript.currentLevel == 2){
+                timeToLive = 10.0f;
+            } else if(playerScript.currentLevel == 3){
+                timeToLive = 8.0f;
+            } else if(playerScript.currentLevel == 4){
+                timeToLive = 8.0f;
+            }
+        } else {
+            if(playerScript.currentLevel == 1){
+                timeToLive = 10.0f;
+            } else if(playerScript.currentLevel == 2){
+                timeToLive = 8.0f;
+            } else if(playerScript.currentLevel == 3){
+                timeToLive = 6.0f;
+            } else if(playerScript.currentLevel == 4){
+                timeToLive = 6.0f;
+            }
+        }
+        Debug.Log("Time to live: " + timeToLive);
+        StartCoroutine(DestroyAfterDelayCoroutine(timeToLive));
+    }
+
+    private IEnumerator DestroyAfterDelayCoroutine(float timeToLive)
+    {
+        yield return new WaitForSeconds(timeToLive); // Wait for 5 seconds
+
+        // Additional cleanup or actions before destroying the object can be added here
+
+        Destroy(this.gameObject); // Destroy the trap object
     }
 }
