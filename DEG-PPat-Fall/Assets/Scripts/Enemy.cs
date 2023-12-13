@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     {
         aIDestinationSetter = GetComponent<AIDestinationSetter>();
         aIPath = GetComponent<AIPath>();
+        aIPath.maxSpeed = 2.0f;
         aIDestinationSetter.target = GameObject.FindGameObjectWithTag("Player").transform;
         status = Random.Range(5, 37);
     }
