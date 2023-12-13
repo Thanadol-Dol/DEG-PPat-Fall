@@ -9,16 +9,15 @@ using UnityEngine.SceneManagement;
 
 [Serializable]
 public class SavedData{
+    public string difficulty;
     public string currentTower;
     public int currentFloor;
-    public string difficulty;
+    public int currentLevel;
     public bool isCompletedForTower;
     public bool isCompletedWhileTower;
     public bool isCompletedDoWhileTower;
     public bool isCompletedMasterTower;
-    public int currentLevel;
     public bool isCompletedIntro;
-    public List<string> SelectedTower = new List<string>();
 
 }
 public class SaveLoadManager : MonoBehaviour
@@ -28,15 +27,15 @@ public class SaveLoadManager : MonoBehaviour
     {
         SavedData saveData = new SavedData
         {
+            difficulty = GameManager.Instance.difficulty,
             currentTower = GameManager.Instance.currentTower,
             currentFloor = GameManager.Instance.currentFloor,
-            difficulty = GameManager.Instance.difficulty,
+            currentLevel = GameManager.Instance.currentLevel,
             isCompletedForTower = GameManager.Instance.isCompletedForTower,
             isCompletedWhileTower = GameManager.Instance.isCompletedWhileTower,
             isCompletedDoWhileTower = GameManager.Instance.isCompletedDoWhileTower,
             isCompletedMasterTower = GameManager.Instance.isCompletedMasterTower,
-            isCompletedIntro = GameManager.Instance.isCompletedIntro,
-            SelectedTower = GameManager.Instance.SelectedTower
+            isCompletedIntro = GameManager.Instance.isCompletedIntro
 
         };
 
@@ -53,16 +52,17 @@ public class SaveLoadManager : MonoBehaviour
             string json = File.ReadAllText(path);
             SavedData saveData = JsonUtility.FromJson<SavedData>(json);
 
+            GameManager.Instance.difficulty = saveData.difficulty;
             GameManager.Instance.currentTower = saveData.currentTower;
             GameManager.Instance.currentFloor = saveData.currentFloor;
-            GameManager.Instance.difficulty = saveData.difficulty;
+            GameManager.Instance.currentLevel = saveData.currentLevel;
             GameManager.Instance.isCompletedForTower = saveData.isCompletedForTower;
             GameManager.Instance.isCompletedWhileTower = saveData.isCompletedWhileTower;
             GameManager.Instance.isCompletedDoWhileTower = saveData.isCompletedDoWhileTower;
             GameManager.Instance.isCompletedMasterTower = saveData.isCompletedMasterTower;
             GameManager.Instance.isCompletedIntro = saveData.isCompletedIntro;
-            GameManager.Instance.SelectedTower = saveData.SelectedTower;
-        }
+           
+        }   
     }
     
     public void Menu()
