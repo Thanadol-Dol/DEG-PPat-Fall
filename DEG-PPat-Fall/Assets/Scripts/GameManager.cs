@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     public bool isCompletedMasterTower;
     public int currentLevel;
     public bool isCompletedIntro;
-    public List<string> SelectedTower = new List<string>();
     public static GameManager Instance;
     
     void Awake(){
