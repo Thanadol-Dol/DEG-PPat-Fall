@@ -17,7 +17,8 @@ public class SavedData{
     public bool isCompletedDoWhileTower;
     public bool isCompletedMasterTower;
     public int currentLevel;
-    public bool isIntro;
+    public bool isCompletedIntro;
+    public List<string> SelectedTower = new List<string>();
 
 }
 public class SaveLoadManager : MonoBehaviour
@@ -34,7 +35,8 @@ public class SaveLoadManager : MonoBehaviour
             isCompletedWhileTower = GameManager.Instance.isCompletedWhileTower,
             isCompletedDoWhileTower = GameManager.Instance.isCompletedDoWhileTower,
             isCompletedMasterTower = GameManager.Instance.isCompletedMasterTower,
-            isIntro = GameManager.Instance.isIntro
+            isCompletedIntro = GameManager.Instance.isCompletedIntro,
+            SelectedTower = GameManager.Instance.SelectedTower
 
         };
 
@@ -58,7 +60,8 @@ public class SaveLoadManager : MonoBehaviour
             GameManager.Instance.isCompletedWhileTower = saveData.isCompletedWhileTower;
             GameManager.Instance.isCompletedDoWhileTower = saveData.isCompletedDoWhileTower;
             GameManager.Instance.isCompletedMasterTower = saveData.isCompletedMasterTower;
-            GameManager.Instance.isIntro = saveData.isIntro;
+            GameManager.Instance.isCompletedIntro = saveData.isCompletedIntro;
+            GameManager.Instance.SelectedTower = saveData.SelectedTower;
         }
     }
     
