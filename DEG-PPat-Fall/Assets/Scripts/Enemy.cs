@@ -51,7 +51,7 @@ public class Enemy : MonoBehaviour
 
         yield return new WaitForSeconds(stunTime);
 
-        aIPath.canMove = false;
+        aIPath.canMove = true;
         // Implement the recovery from stun here, for example, by enabling movement or restoring behavior
         Debug.Log("Enemy has recovered from stun!");
     }

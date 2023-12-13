@@ -96,12 +96,14 @@ MonoBehaviour:
   topicButtonPrefab: {fileID: 613382728471322536, guid: 368d734f0057dd949bafa89655bf184e, type: 3}
   contentPanelPrefab:
   - {fileID: 2542060962807587686, guid: 71c0a2978c44b734e925ab83ca5709bf, type: 3}
+  - {fileID: 2542060962807587686, guid: 6ea3387f50e7aae47b88e550b0a3c7f4, type: 3}
   topicTransform: {fileID: 8960871103463166279}
   contentTransform: {fileID: 7406293528527927115}
   newContentPanel: {fileID: 0}
   canvasTransform: {fileID: 0}
   topicList:
-  - File1
+  - Easy_File1
+  - Easy_File2
 --- !u!1 &1242931576608260581
 GameObject:
   m_ObjectHideFlags: 0
