@@ -8,7 +8,7 @@ public class Intro : MonoBehaviour
 {
 
     private int currentPanelIndex = 0;
-    private float activeTime = 3.5f;
+    private float activeTime = 1.5f;
     public Button continueButton;
     public Button BackButton;
     public GameObject[] cutscenePanels;
