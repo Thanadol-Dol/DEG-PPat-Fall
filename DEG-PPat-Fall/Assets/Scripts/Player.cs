@@ -1,18 +1,23 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
+    [Header("Player status")]
     public float speed;
     public float sprintSpeed;
     public float stamina;
     public float sprintCost;
+
+    [Header("Trap status")]
     public float trapPlacementRadius;
     public float holdToIncreaseTrapTime;
 
     // New variable for trapMaterial
-    private int trapMaterial;
+    private int trapMaterial = 0;
 
     public GameObject trapPrefab;
     public GameObject previewTrapPrefab;
@@ -39,6 +44,13 @@ public class Player : MonoBehaviour
     public string currentDifficulty;
     public int currentLevel;
 
+    public Slider craftTime;
+    public Slider staminaBar;
+
+    public TextMeshProUGUI materials;
+    public TextMeshProUGUI trap_C;
+    
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -48,7 +60,7 @@ public class Player : MonoBehaviour
         sprintCost = 10f;
         trapPlacementRadius = 2.0f;
         holdToIncreaseTrapTime = 2f;
-        trapMaterial = 0;
+        //trapMaterial = 0;
         isPlacingTrap = false;
         timeHoldingIncreaseKey = 0f;
         trapNumber = 0;
@@ -64,6 +76,9 @@ public class Player : MonoBehaviour
         currentTower = "While";
         currentDifficulty = "Normal";
         currentLevel = 2;
+        materials.text = trapMaterial.ToString();
+        trap_C.text = trapNumber.ToString();
+        
     }
 
     void Update()
@@ -90,11 +105,13 @@ public class Player : MonoBehaviour
         {
             stamina -= sprintCost * Time.deltaTime;
             stamina = Mathf.Clamp(stamina, 0f, 100f);
+            staminaBar.value = stamina;
         }
         else
         {
             stamina += Time.deltaTime;
             stamina = Mathf.Clamp(stamina, 0f, 100f);
+            staminaBar.value = stamina;
         }
     }
 
@@ -103,31 +120,37 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.Z))
         {
             timeHoldingIncreaseKey += Time.deltaTime;
+            craftTime.value = timeHoldingIncreaseKey * 0.5f;
 
             if (timeHoldingIncreaseKey >= holdToIncreaseTrapTime)
             {
+                craftTime.value = 0;
                 // Check if there are enough trapMaterial to craft a trap
                 if (trapMaterial >= 3)
                 {
                     trapNumber++;
+                    trap_C.text = trapNumber.ToString();
                     Debug.Log("Trap number increased to " + trapNumber);
 
                     // Decrease trapMaterial by 3
                     trapMaterial -= 3;
-
+                    materials.text = trapMaterial.ToString();
                     Debug.Log("trapMaterial remaining: " + trapMaterial);
 
                     timeHoldingIncreaseKey = 0f;
+                    
                 }
                 else
                 {
                     Debug.Log("Not enough trapMaterial to craft a trap!");
+                    craftTime.value = 0;
                 }
             }
         }
         else
         {
             timeHoldingIncreaseKey = 0f;
+            craftTime.value = 0;
         }
     }
 
@@ -136,9 +159,11 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.Q))
         {
             if (!isPlacingTrap)
-            {
+            {   
+                
                 isPlacingTrap = true;
                 previewTrap = Instantiate(previewTrapPrefab, transform.position, Quaternion.identity);
+                
             }
 
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -179,6 +204,7 @@ public class Player : MonoBehaviour
                 }
                 currentTrapPanelNumber = Random.Range(0, trapSetupPanelPrefabs.Count);
                 trapNumber--;
+                trap_C.text = trapNumber.ToString();
             }
             else
             {
@@ -216,4 +242,6 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(tipTrickPanelCooldownTime);
         tipTrickPanelCooldown = false;
     }
+
+    
 }
