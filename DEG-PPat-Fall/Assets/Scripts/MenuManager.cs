@@ -19,7 +19,7 @@ public class MenuManager : MonoBehaviour
         quitGameButton.interactable = true;
 
         string currentTower = GameManager.Instance.currentTower;
-        string checkTower = "NonSelect";
+        string checkTower = "";
 
         if (string.Equals(currentTower,checkTower, System.StringComparison.OrdinalIgnoreCase))
         {
@@ -32,13 +32,17 @@ public class MenuManager : MonoBehaviour
             LoadGameButton.interactable = true;
         }
     }
+
+    void Update(){
+
+    }
     public void Menu()
     {
         SceneManager.LoadScene("Menu");
     }
     public void continueGame()
     {
-        //SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("SelectStage");
     }
 
     public void newGame()
