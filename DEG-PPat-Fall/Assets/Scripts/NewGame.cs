@@ -17,7 +17,6 @@ public class NewGame : MonoBehaviour
         GameManager.Instance.isCompletedMasterTower = false;
         GameManager.Instance.isCompletedIntro = false;
         GameManager.Instance.currentLevel = 1;
-        GameManager.Instance.SelectedTower = new List<string>();
 
         SceneManager.LoadScene("Intro");
     }
