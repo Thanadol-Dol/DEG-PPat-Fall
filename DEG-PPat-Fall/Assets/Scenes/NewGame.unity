@@ -343,7 +343,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2009458301}
-        m_TargetAssemblyTypeName: NewGameManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: NewGame, Assembly-CSharp
         m_MethodName: Menu
         m_Mode: 1
         m_Arguments:
@@ -477,7 +477,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2009458301}
-        m_TargetAssemblyTypeName: NewGameManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: NewGame, Assembly-CSharp
         m_MethodName: SelectDifficulty
         m_Mode: 5
         m_Arguments:
@@ -1206,7 +1206,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2009458301}
-        m_TargetAssemblyTypeName: NewGameManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: NewGame, Assembly-CSharp
         m_MethodName: SelectDifficulty
         m_Mode: 5
         m_Arguments:
@@ -1416,7 +1416,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2009458301}
-        m_TargetAssemblyTypeName: NewGameManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: NewGame, Assembly-CSharp
         m_MethodName: SelectDifficulty
         m_Mode: 5
         m_Arguments:

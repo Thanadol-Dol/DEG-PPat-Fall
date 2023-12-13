@@ -1303,7 +1303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5c8278e1a963f3459c9f87a474f03e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTower: NonSelect
+  currentTower: 
   currentFloor: 0
   difficulty: 
   isCompletedForTower: 0
@@ -1311,7 +1311,8 @@ MonoBehaviour:
   isCompletedDoWhileTower: 0
   isCompletedMasterTower: 0
   currentLevel: 0
-  isIntro: 0
+  isCompletedIntro: 0
+  SelectedTower: []
 --- !u!1 &904903533
 GameObject:
   m_ObjectHideFlags: 0
