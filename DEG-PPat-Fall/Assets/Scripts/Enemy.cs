@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        aIDestinationSetter.target = GameObject.FindGameObjectWithTag("Player").transform;
         bool canPlayerSeeEnemyStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().canSeeEnemyStatus;
         if(canPlayerSeeEnemyStatus)
         {
