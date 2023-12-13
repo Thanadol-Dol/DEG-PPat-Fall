@@ -22,8 +22,8 @@ public class Floor : MonoBehaviour
     // Function to clear the tilemaps
     public void ClearTilemaps()
     {
-        baseTilemap.ClearAllTiles();
         wallTilemap.ClearAllTiles();
+        baseTilemap.ClearAllTiles();
     }
 
     

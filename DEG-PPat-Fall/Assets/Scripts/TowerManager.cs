@@ -30,28 +30,31 @@ public class TowerManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.O))
         {
             DestroyPlayerAndEnemy();
+            CheckCompletedTower();
             Debug.Log("Switching to next floor");
             SwitchToNextFloor();
             FindSpawnPoint();
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            CompleteTower();
         }
     }
 
     void SwitchToNextFloor()
     {
-        // Clear the current floor before deactivating
-        Floors[GameManager.Instance.currentFloor].GetComponent<Floor>().ClearTilemaps();
-
-        // Deactivate the current floor
-        Floors[GameManager.Instance.currentFloor].SetActive(false);
-
-        // Increment the floor index
-        GameManager.Instance.currentFloor++;
-
-        // Activate the next floor
-        Floors[GameManager.Instance.currentFloor].SetActive(true);
-
-        // Set up the new floor
-        SetupCurrentFloor();
+        if (GameManager.Instance.currentFloor < Floors.Length - 1)
+        {
+            Floors[GameManager.Instance.currentFloor].GetComponent<Floor>().ClearTilemaps();
+            Floors[GameManager.Instance.currentFloor].SetActive(false);
+            GameManager.Instance.currentFloor++;
+            Floors[GameManager.Instance.currentFloor].SetActive(true);
+            SetupCurrentFloor();
+        }
+        else{
+            Debug.Log("No more floors!");
+        }
     }
 
     void SetupCurrentFloor()
@@ -91,5 +94,20 @@ public class TowerManager : MonoBehaviour
             }
         }
         
+    }
+
+    public void CheckCompletedTower()
+    {
+        if (GameManager.Instance.currentFloor == Floors.Length - 1)
+        {
+            GameManager.Instance.isCompletedForTower = true;
+            SceneManager.LoadScene("SelectStage");
+        }
+    }
+
+    public void CompleteTower()
+    {
+        GameManager.Instance.isCompletedForTower = true;
+        SceneManager.LoadScene("SelectStage");
     }
 }
