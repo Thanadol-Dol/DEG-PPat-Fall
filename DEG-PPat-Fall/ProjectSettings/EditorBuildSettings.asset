@@ -36,6 +36,6 @@ EditorBuildSettings:
     path: Assets/Scenes/PlayerTest.unity
     guid: 9e87d0c8fab5895418534163890636df
   - enabled: 1
-    path: Assets/Scenes/Outro.unity
-    guid: 8c1a5e6160baf8748b05a3018e4b0e95
+    path: Assets/Scenes/MasterTower.unity
+    guid: 1391d2f47305e1541ad26803367605c6
   m_configObjects: {}

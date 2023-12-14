@@ -41576,7 +41576,7 @@ MonoBehaviour:
   - {fileID: 1675225015}
   - {fileID: 1624328308}
   stairDownTilemap: []
-  switchTilemap: {fileID: 0}
+  switchTilemap: {fileID: 285213874}
 --- !u!1 &1574172260
 GameObject:
   m_ObjectHideFlags: 0
