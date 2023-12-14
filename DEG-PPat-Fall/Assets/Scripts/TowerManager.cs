@@ -84,6 +84,7 @@ public class TowerManager : MonoBehaviour
         }
 
         CheckStairClick();
+        checkSwitchClick();
     }
 
     public void goNextFloor()
@@ -290,12 +291,10 @@ public class TowerManager : MonoBehaviour
         {
 
             Vector3 stairPosition = stairTransform.position;
-            Vector3.Distance(playerInstance.transform.position, mousePosition);
-            float disPlayer_Mouse = Vector3.Distance(playerInstance.transform.position, stairPosition);
-            if (disPlayer_Mouse >= 2.0f)
-            {
+            /*float disPlayer_Mouse = Vector3.Distance(playerInstance.transform.position, mousePosition);
+            if(disPlayer_Mouse >= 2.0f){
                 return true;
-            }
+            }*/
             Debug.Log("Click!" + StairDirection);
             float disPlayer_Stair = Vector3.Distance(playerInstance.transform.position, stairPosition);
 
@@ -322,6 +321,31 @@ public class TowerManager : MonoBehaviour
     public void SwitchCompleted()
     {
         floorSwitch[GameManager.Instance.currentFloor] = true;
+        if(floorSwitch[GameManager.Instance.currentFloor] && GameManager.Instance.currentFloor == Floors.Length - 1){
+            CompleteTower();
+        }
+    }
+
+    public void checkSwitchClick(){
+        if (Input.GetMouseButtonDown(0))
+        {
+            if(Floors[GameManager.Instance.currentFloor].transform.Find("Switch") != null){
+                //Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector3 switchPosition = Floors[GameManager.Instance.currentFloor].transform.Find("Switch").position;
+                
+                //float disPlayer_Mouse = Vector3.Distance(playerInstance.transform.position, mousePosition);
+                //if(disPlayer_Mouse <= 1.0f){
+                    float disPlayer_Switch = Vector3.Distance(playerInstance.transform.position, switchPosition);
+
+                    if (disPlayer_Switch <= 1.3f)
+                    {
+                        SwitchCompleted();
+                        Debug.Log("Switch Completed!");
+                    }
+
+                //}
+            }
+        }
     }
 
     public void CheckCompletedTower()
