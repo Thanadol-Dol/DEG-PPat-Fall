@@ -123,7 +123,11 @@ public class PuzzleCalculator : MonoBehaviour
             default:
                 Debug.Log("Invalid trap number");
                 return 0;
-        }
+        } 
+    }
+
+    public bool AddingFileCalculate(List<string> answers,string filePanelName){
+        return true;
     }
 
     public bool CompareCalculate(int num1, string op, int num2){

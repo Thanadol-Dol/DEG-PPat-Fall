@@ -6,6 +6,7 @@ public class ReadableFile : MonoBehaviour
 {
     public float pickupRange;
     public GameObject filePanel;
+    public GameObject fileContent;
 
     public List<string> answers = new List<string>();
 
@@ -29,7 +30,7 @@ public class ReadableFile : MonoBehaviour
                     if (IsPlayerWithinPickupRange(playerObject.transform.position))
                     {
                         ShowPanel();
-                        playerScript.isTrapPanelOpen = true;
+                        playerScript.isReadableFilePanelOpen = true;
                     }
                     else
                     {
@@ -91,6 +92,21 @@ public class ReadableFile : MonoBehaviour
         else
         {
             Debug.LogError("Trap setup panel prefab is not assigned in the inspector.");
+        }
+    }
+
+    public void CheckAnswer()
+    {
+        PuzzleCalculator puzzleCalculator = GameObject.Find("PuzzleCalculator").GetComponent<PuzzleCalculator>();
+        bool canAdd = puzzleCalculator.AddingFileCalculate(answers, fileContent.name);
+        if(canAdd)
+        {
+            TowerManager towerManager = GameObject.Find("TowerManager").GetComponent<TowerManager>();
+            towerManager.AddTopic(fileContent.name);
+        }
+        else
+        {
+            return;
         }
     }
 }

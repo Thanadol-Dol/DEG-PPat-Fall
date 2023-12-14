@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 2479109040381115499}
   - component: {fileID: 6506419393867261528}
   m_Layer: 5
-  m_Name: Easy_File2
+  m_Name: Trap_Craft
   m_TagString: TipTrickPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -127,35 +127,36 @@ public class Trap : MonoBehaviour
     public void DestroyAfterDelay()
     {
         float timeToLive = 0f;
-        Player playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        if(playerScript.currentDifficulty.Equals("Beginner")){
-            if(playerScript.currentLevel == 1){
+        string currentDifficulty = GameManager.Instance.difficulty;
+        int currentLevel = GameManager.Instance.currentLevel;
+        if(currentDifficulty.Equals("Beginner")){
+            if(currentLevel == 1){
                 return;
-            } else if(playerScript.currentLevel == 2){
+            } else if(currentLevel == 2){
                 timeToLive = 12.0f;
-            } else if(playerScript.currentLevel == 3){
+            } else if(currentLevel == 3){
                 timeToLive = 10.0f;
-            } else if(playerScript.currentLevel == 4){
+            } else if(currentLevel == 4){
                 timeToLive = 10.0f;
             }
-        } else if(playerScript.currentDifficulty.Equals("Normal")){
-            if(playerScript.currentLevel == 1){
+        } else if(currentDifficulty.Equals("Normal")){
+            if(currentLevel == 1){
                 return;
-            } else if(playerScript.currentLevel == 2){
+            } else if(currentLevel == 2){
                 timeToLive = 10.0f;
-            } else if(playerScript.currentLevel == 3){
+            } else if(currentLevel == 3){
                 timeToLive = 8.0f;
-            } else if(playerScript.currentLevel == 4){
+            } else if(currentLevel == 4){
                 timeToLive = 8.0f;
             }
         } else {
-            if(playerScript.currentLevel == 1){
+            if(currentLevel == 1){
                 timeToLive = 10.0f;
-            } else if(playerScript.currentLevel == 2){
+            } else if(currentLevel == 2){
                 timeToLive = 8.0f;
-            } else if(playerScript.currentLevel == 3){
+            } else if(currentLevel == 3){
                 timeToLive = 6.0f;
-            } else if(playerScript.currentLevel == 4){
+            } else if(currentLevel == 4){
                 timeToLive = 6.0f;
             }
         }

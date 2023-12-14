@@ -18,11 +18,44 @@ public class TowerManager : MonoBehaviour
     private bool StairDown1 = false;
     private bool StairDown2 = false;
     private List<bool> floorSwitch = new List<bool>();
-    
+    public List<GameObject> trapSetupPanelPrefabs = new List<GameObject>();
+    public List<string> topicList = new List<string>();
+
     // Start is called before the first frame update
     void Start()
     {
+        foreach (GameObject trapSetupPanel in GameManager.Instance.easyTrapSetupPanel)
+        {
+            trapSetupPanelPrefabs.Add(trapSetupPanel);
+        }
+        foreach (GameObject trapSetupPanel in GameManager.Instance.mediumTrapSetupPanel)
+        {
+            trapSetupPanelPrefabs.Add(trapSetupPanel);
+        }
+        foreach (GameObject trapSetupPanel in GameManager.Instance.hardTrapSetupPanel)
+        {
+            trapSetupPanelPrefabs.Add(trapSetupPanel);
+        }
+        trapSetupPanelPrefabs.Add(GameManager.Instance.whileTrapSetupPanel);
+        trapSetupPanelPrefabs.Add(GameManager.Instance.forTrapSetupPanel);
+        trapSetupPanelPrefabs.Add(GameManager.Instance.doWhileTrapSetupPanel);
+        if (GameManager.Instance.currentLevel >= 1)
+        {
+            foreach (GameObject readableFileContent in GameManager.Instance.easyReadableFileContent)
+            {
+                topicList.Add(readableFileContent.name);
+            }
+        }
+        if (GameManager.Instance.currentLevel >= 2)
+        {
 
+            topicList.Add(GameManager.Instance.mediumReadableFileContent.name);
+        }
+        if (GameManager.Instance.currentLevel >= 3)
+        {
+
+            topicList.Add(GameManager.Instance.hardReadableFileContent.name);
+        }
         Floors[0].SetActive(true);
         for (int i = 1; i < Floors.Length; i++)
         {
@@ -35,7 +68,6 @@ public class TowerManager : MonoBehaviour
             floorSwitch.Add(false);
         }
         floorSwitch[0] = true;
-
     }
 
     // Update is called once per frame
@@ -54,7 +86,8 @@ public class TowerManager : MonoBehaviour
         CheckStairClick();
     }
 
-    public void goNextFloor(){
+    public void goNextFloor()
+    {
         DestroyPlayerAndEnemy();
         CheckCompletedTower();
         Debug.Log("Switching to next floor");
@@ -62,7 +95,8 @@ public class TowerManager : MonoBehaviour
         FindSpawnPoint();
     }
 
-    public void goPreviousFloor(){
+    public void goPreviousFloor()
+    {
         DestroyPlayerAndEnemy();
         CheckCompletedTower();
         Debug.Log("Switching to previous floor");
@@ -82,7 +116,8 @@ public class TowerManager : MonoBehaviour
             Floors[GameManager.Instance.currentFloor].GetComponent<Floor>().SetupTilemaps();
             Floors[GameManager.Instance.currentFloor].SetActive(true);
         }
-        else{
+        else
+        {
             Debug.Log("No more floors!");
         }
     }
@@ -99,7 +134,8 @@ public class TowerManager : MonoBehaviour
             Floors[GameManager.Instance.currentFloor].GetComponent<Floor>().SetupTilemaps();
             Floors[GameManager.Instance.currentFloor].SetActive(true);
         }
-        else{
+        else
+        {
             Debug.Log("No more floors!");
         }
     }
@@ -108,9 +144,9 @@ public class TowerManager : MonoBehaviour
     {
         if (GameManager.Instance.currentFloor >= 0 && GameManager.Instance.currentFloor < Floors.Length)
         {
-            if(GameManager.Instance.currentFloor == 0)
+            if (GameManager.Instance.currentFloor == 0)
             {
-                if(Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawn1") != null)
+                if (Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawn1") != null)
                 {
                     Transform playerSpawnPoint = Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawn1");
                     playerInstance = Instantiate(playerPrefab, playerSpawnPoint.position, Quaternion.identity);
@@ -119,34 +155,40 @@ public class TowerManager : MonoBehaviour
                 StairUp2 = false;
                 StairDown1 = false;
                 StairDown2 = false;
-            }else{
+            }
+            else
+            {
 
-                if(StairUp1 == true){
-                    if(Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawn1") != null)
+                if (StairUp1 == true)
+                {
+                    if (Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawn1") != null)
                     {
                         Transform playerSpawnPoint = Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawn1");
                         playerInstance = Instantiate(playerPrefab, playerSpawnPoint.position, Quaternion.identity);
                     }
                     StairUp1 = false;
                 }
-                else if(StairUp2 == true){
-                    if(Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawn2") != null)
+                else if (StairUp2 == true)
+                {
+                    if (Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawn2") != null)
                     {
                         Transform playerSpawnPoint = Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawn2");
                         playerInstance = Instantiate(playerPrefab, playerSpawnPoint.position, Quaternion.identity);
                     }
                     StairUp2 = false;
                 }
-                else if(StairDown1 == true){
-                    if(Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawnD1") != null)
+                else if (StairDown1 == true)
+                {
+                    if (Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawnD1") != null)
                     {
                         Transform playerSpawnPoint = Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawnD1");
                         playerInstance = Instantiate(playerPrefab, playerSpawnPoint.position, Quaternion.identity);
                     }
                     StairDown1 = false;
                 }
-                else if(StairDown2 == true){
-                    if(Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawnD2") != null)
+                else if (StairDown2 == true)
+                {
+                    if (Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawnD2") != null)
                     {
                         Transform playerSpawnPoint = Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawnD2");
                         playerInstance = Instantiate(playerPrefab, playerSpawnPoint.position, Quaternion.identity);
@@ -155,7 +197,7 @@ public class TowerManager : MonoBehaviour
                 }
             }
 
-            if(Floors[GameManager.Instance.currentFloor].transform.Find("EnemySpawn") != null)
+            if (Floors[GameManager.Instance.currentFloor].transform.Find("EnemySpawn") != null)
             {
                 Transform enemySpawnPoint = Floors[GameManager.Instance.currentFloor].transform.Find("EnemySpawn");
                 enemyInstance = Instantiate(enemyPrefab, enemySpawnPoint.position, Quaternion.identity);
@@ -176,37 +218,45 @@ public class TowerManager : MonoBehaviour
                 Destroy(enemyInstance);
             }
         }
-        
+
     }
 
     public void StairUp(int StairNumber)
     {
-        if(floorSwitch[GameManager.Instance.currentFloor] == true){
-            if (StairNumber == 1){
+        if (floorSwitch[GameManager.Instance.currentFloor] == true)
+        {
+            if (StairNumber == 1)
+            {
                 StairUp1 = true;
             }
-            else if (StairNumber == 2){
+            else if (StairNumber == 2)
+            {
                 StairUp2 = true;
             }
             goNextFloor();
-        }else{
+        }
+        else
+        {
             Debug.Log("Switch is not completed!");
         }
-        
+
     }
 
     public void StairDown(int StairNumber)
     {
-        if(GameManager.Instance.currentFloor > 0){
-            if (StairNumber == 1){
+        if (GameManager.Instance.currentFloor > 0)
+        {
+            if (StairNumber == 1)
+            {
                 StairDown1 = true;
             }
-            else if (StairNumber == 2){
+            else if (StairNumber == 2)
+            {
                 StairDown2 = true;
             }
             goPreviousFloor();
         }
-        
+
     }
 
     public void CheckStairClick()
@@ -217,27 +267,29 @@ public class TowerManager : MonoBehaviour
             bool isClickable = true;
             isClickable = CheckStair(Floors[GameManager.Instance.currentFloor].transform.Find("StairUpPoint1"), "Up", 1, mousePosition, isClickable);
             isClickable = CheckStair(Floors[GameManager.Instance.currentFloor].transform.Find("StairUpPoint2"), "Up", 2, mousePosition, isClickable);
-            
+
             isClickable = CheckStair(Floors[GameManager.Instance.currentFloor].transform.Find("StairDownPoint1"), "Down", 1, mousePosition, isClickable);
             isClickable = CheckStair(Floors[GameManager.Instance.currentFloor].transform.Find("StairDownPoint2"), "Down", 2, mousePosition, isClickable);
-            
-                
+
+
         }
     }
 
-    public bool CheckStair(Transform stairTransform, string StairDirection, int stairNumber, Vector3 mousePosition,bool isClickable)
+    public bool CheckStair(Transform stairTransform, string StairDirection, int stairNumber, Vector3 mousePosition, bool isClickable)
     {
-        if(isClickable == false){
+        if (isClickable == false)
+        {
             return false;
         }
 
         if (stairTransform != null)
         {
-            
+
             Vector3 stairPosition = stairTransform.position;
             Vector3.Distance(playerInstance.transform.position, mousePosition);
             float disPlayer_Mouse = Vector3.Distance(playerInstance.transform.position, stairPosition);
-            if(disPlayer_Mouse >= 2.0f){
+            if (disPlayer_Mouse >= 2.0f)
+            {
                 return true;
             }
             Debug.Log("Click!" + StairDirection);
@@ -245,7 +297,7 @@ public class TowerManager : MonoBehaviour
 
             if (disPlayer_Stair <= 2.0f)
             {
-                
+
                 if (StairDirection == "Down")
                 {
                     Debug.Log("StairDown!");
@@ -310,5 +362,9 @@ public class TowerManager : MonoBehaviour
             GameManager.Instance.isCompletedMasterTower = true;
         }
         SceneManager.LoadScene("SelectStage");
+    }
+    public void AddTopic(string topic)
+    {
+        topicList.Add(topic);
     }
 }

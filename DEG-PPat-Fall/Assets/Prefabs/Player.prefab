@@ -936,32 +936,20 @@ MonoBehaviour:
   holdToIncreaseTrapTime: 0
   trapPrefab: {fileID: 5731228341068790184, guid: f980ef2c5af53a440adb80c02ca5b2b0, type: 3}
   previewTrapPrefab: {fileID: 5731228341068790184, guid: 9785acbbe9425be45a0b842317a96315, type: 3}
-  trapSetupPanelPrefabs:
-  - {fileID: 783336311763434048, guid: 06e7001ffa804204aaa305688c3899ac, type: 3}
-  - {fileID: 783336311763434048, guid: f1a6a3b2e1fa7472f80b1be783f20647, type: 3}
-  - {fileID: 783336311763434048, guid: 3202a1ee7121e43c0b753955bb943eca, type: 3}
-  - {fileID: 783336311763434048, guid: e07bf870b548d42d2b790182fd10baad, type: 3}
-  - {fileID: 783336311763434048, guid: 46993d9fb75b5499eaf844ba8ad45805, type: 3}
-  - {fileID: 783336311763434048, guid: d6abeb97dcead4e19939e26918262401, type: 3}
-  - {fileID: 783336311763434048, guid: fe5a9f8c9abc84ff9a11f93b4c5eda44, type: 3}
-  - {fileID: 783336311763434048, guid: 6ac994e2dbb5345d3a2f32678b4739da, type: 3}
-  - {fileID: 783336311763434048, guid: f8e6e3de7d7cd49ea84692d8a9e79ede, type: 3}
-  - {fileID: 783336311763434048, guid: ecd1eecd71fa64ae9892590703ae7196, type: 3}
-  - {fileID: 783336311763434048, guid: c2bb11e142da94488b015b2c057ca3fe, type: 3}
-  - {fileID: 783336311763434048, guid: 2fc694feaf8e24454b18708971f6fc51, type: 3}
+  trapSetupPanelPrefabs: []
   isTrapPanelOpen: 0
   isTipTrickPanelOpen: 0
   tipTrickPanel: {fileID: 783336311763434048, guid: 83e3652ad5d627a40b135621cb65bf42, type: 3}
   canvas: {fileID: 0}
   canSeeEnemyStatus: 0
   isGrabByEnemy: 0
-  currentTower: 
-  currentDifficulty: 
-  currentLevel: 0
   craftTime: {fileID: 5162665873829847408}
   staminaBar: {fileID: 7349051510779467343}
   materials: {fileID: 7990387881697735407}
   trap_C: {fileID: 3744223723137293451}
+  isReadableFilePanelOpen: 0
+  readableFileName: []
+  readableFile: []
 --- !u!70 &3943706999590198946
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -5,13 +5,13 @@ using UnityEngine.UI;
 public class ReadableFilePanel : MonoBehaviour
 {
     private ReadableFile file;
-    public Button setupButton;
+    public Button confirmButton;
     public List<AnswerSlot> answerSlots = new List<AnswerSlot>();
     private List<string> answers = new List<string>();
 
     private void Start()
     {
-        setupButton.interactable = false;
+        confirmButton.interactable = false;
         Time.timeScale = 0f;
     }
 
@@ -19,11 +19,11 @@ public class ReadableFilePanel : MonoBehaviour
     {
         if (CheckIfAllAnswerSlotsFilled())
         {
-            setupButton.interactable = true;
+            confirmButton.interactable = true;
         }
         else
         {
-            setupButton.interactable = false;
+            confirmButton.interactable = false;
         }
     }
 
@@ -57,9 +57,11 @@ public class ReadableFilePanel : MonoBehaviour
     {
         if (file != null)
         {
+            Player playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             Time.timeScale = 1f;
             // Interact with the specific file
             Debug.Log("Closing panel for file: " + file.name);
+            playerScript.isReadableFilePanelOpen = false;
             // Destroy the panel
             Destroy(gameObject);
         }
@@ -81,6 +83,9 @@ public class ReadableFilePanel : MonoBehaviour
                 Debug.Log(answer);
             }
             file.answers = answers;
+            file.CheckAnswer();
+            Player playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            playerScript.isReadableFilePanelOpen = false;
             // Destroy the panel
             Destroy(gameObject);
         }
