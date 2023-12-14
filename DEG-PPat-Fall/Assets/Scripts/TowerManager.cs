@@ -369,7 +369,11 @@ public class TowerManager : MonoBehaviour
                 GameManager.Instance.isCompletedMasterTower = true;
             }
             GameManager.Instance.currentLevel++;
-            SceneManager.LoadScene("SelectStage");
+            if(GameManager.Instance.isCompletedMasterTower){
+                SceneManager.LoadScene("Outro");
+            }else{
+                SceneManager.LoadScene("SelectStage");
+            }
         }
     }
 
@@ -392,7 +396,12 @@ public class TowerManager : MonoBehaviour
             GameManager.Instance.isCompletedMasterTower = true;
         }
         GameManager.Instance.currentLevel++;
-        SceneManager.LoadScene("SelectStage");
+        if(GameManager.Instance.isCompletedMasterTower){
+            SceneManager.LoadScene("Outro");
+        }else{
+            SceneManager.LoadScene("SelectStage");
+        }
+        
     }
     public void AddTopic(string topic)
     {
