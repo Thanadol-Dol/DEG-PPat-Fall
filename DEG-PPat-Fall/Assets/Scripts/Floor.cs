@@ -54,7 +54,9 @@ public class Floor : MonoBehaviour
         {
             stairDown.ClearAllTiles();
         }
-        switchTilemap.ClearAllTiles();
+        if(switchTilemap != null){
+            switchTilemap.ClearAllTiles();
+        }
     }
 
     
