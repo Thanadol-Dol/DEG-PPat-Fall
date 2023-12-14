@@ -390,6 +390,7 @@ public class TowerManager : MonoBehaviour
         {
             GameManager.Instance.isCompletedMasterTower = true;
         }
+        GameManager.Instance.currentLevel++;
         SceneManager.LoadScene("SelectStage");
     }
     public void AddTopic(string topic)
