@@ -9,6 +9,7 @@ public class Floor : MonoBehaviour
     public Tilemap wallTilemap;
     public Tilemap[] stairUpTilemap;
     public Tilemap[] stairDownTilemap;
+    public Tilemap switchTilemap;
 
     public void SetupTilemaps()
     {
@@ -36,6 +37,9 @@ public class Floor : MonoBehaviour
             stairDown.SetTile(new Vector3Int(0, 0, 0), stairDownTile);
             index++;
         }
+
+        TileBase switchTile = Resources.Load<TileBase>("Switch");
+        switchTilemap.SetTile(new Vector3Int(0, 0, 0), switchTile);
     }
     // Function to clear the tilemaps
     public void ClearTilemaps()
@@ -50,8 +54,7 @@ public class Floor : MonoBehaviour
         {
             stairDown.ClearAllTiles();
         }
-        //stairUp1Tilemap.ClearAllTiles();
-        //stairUp2Tilemap.ClearAllTiles();
+        switchTilemap.ClearAllTiles();
     }
 
     
