@@ -12,16 +12,30 @@ public class TowerManager : MonoBehaviour
     public GameObject[] Floors;
     private GameObject playerInstance;
     private GameObject enemyInstance;
+
+    private bool StairUp1 = false;
+    private bool StairUp2 = false;
+    private bool StairDown1 = false;
+    private bool StairDown2 = false;
+    private List<bool> floorSwitch = new List<bool>();
     
     // Start is called before the first frame update
     void Start()
     {
+
         Floors[0].SetActive(true);
         for (int i = 1; i < Floors.Length; i++)
         {
             Floors[i].SetActive(false);
         }
         FindSpawnPoint();
+
+        for (int i = 0; i < Floors.Length; i++)
+        {
+            floorSwitch.Add(false);
+        }
+        floorSwitch[0] = true;
+
     }
 
     // Update is called once per frame
@@ -29,60 +43,129 @@ public class TowerManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.O))
         {
-            DestroyPlayerAndEnemy();
-            CheckCompletedTower();
-            Debug.Log("Switching to next floor");
-            SwitchToNextFloor();
-            FindSpawnPoint();
+            goNextFloor();
         }
 
         if (Input.GetKeyDown(KeyCode.P))
         {
             CompleteTower();
         }
+
+        CheckStairClick();
     }
 
-    void SwitchToNextFloor()
+    public void goNextFloor(){
+        DestroyPlayerAndEnemy();
+        CheckCompletedTower();
+        Debug.Log("Switching to next floor");
+        NextFloor();
+        FindSpawnPoint();
+    }
+
+    public void goPreviousFloor(){
+        DestroyPlayerAndEnemy();
+        CheckCompletedTower();
+        Debug.Log("Switching to previous floor");
+        previousFloor();
+        FindSpawnPoint();
+    }
+
+    private void NextFloor()
     {
         if (GameManager.Instance.currentFloor < Floors.Length - 1)
         {
+            Debug.Log("Current Floor : " + GameManager.Instance.currentFloor);
             Floors[GameManager.Instance.currentFloor].GetComponent<Floor>().ClearTilemaps();
             Floors[GameManager.Instance.currentFloor].SetActive(false);
             GameManager.Instance.currentFloor++;
+            Debug.Log("Current Floor : " + GameManager.Instance.currentFloor);
+            Floors[GameManager.Instance.currentFloor].GetComponent<Floor>().SetupTilemaps();
             Floors[GameManager.Instance.currentFloor].SetActive(true);
-            SetupCurrentFloor();
         }
         else{
             Debug.Log("No more floors!");
         }
     }
 
-    void SetupCurrentFloor()
+    private void previousFloor()
     {
-        Floors[GameManager.Instance.currentFloor].GetComponent<Floor>().SetupTilemaps();
+        if (GameManager.Instance.currentFloor > 0)
+        {
+            Debug.Log("Current Floor : " + GameManager.Instance.currentFloor);
+            Floors[GameManager.Instance.currentFloor].GetComponent<Floor>().ClearTilemaps();
+            Floors[GameManager.Instance.currentFloor].SetActive(false);
+            GameManager.Instance.currentFloor--;
+            Debug.Log("Current Floor : " + GameManager.Instance.currentFloor);
+            Floors[GameManager.Instance.currentFloor].GetComponent<Floor>().SetupTilemaps();
+            Floors[GameManager.Instance.currentFloor].SetActive(true);
+        }
+        else{
+            Debug.Log("No more floors!");
+        }
     }
 
     public void FindSpawnPoint()
     {
-        if (GameManager.Instance.currentFloor < Floors.Length)
+        if (GameManager.Instance.currentFloor >= 0 && GameManager.Instance.currentFloor < Floors.Length)
         {
-            Transform playerSpawnPoint = Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawn");
-            if (playerSpawnPoint != null)
+            if(GameManager.Instance.currentFloor == 0)
             {
-                playerInstance = Instantiate(playerPrefab, playerSpawnPoint.position, Quaternion.identity);
+                if(Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawn1") != null)
+                {
+                    Transform playerSpawnPoint = Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawn1");
+                    playerInstance = Instantiate(playerPrefab, playerSpawnPoint.position, Quaternion.identity);
+                }
+                StairUp1 = false;
+                StairUp2 = false;
+                StairDown1 = false;
+                StairDown2 = false;
+            }else{
+
+                if(StairUp1 == true){
+                    if(Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawn1") != null)
+                    {
+                        Transform playerSpawnPoint = Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawn1");
+                        playerInstance = Instantiate(playerPrefab, playerSpawnPoint.position, Quaternion.identity);
+                    }
+                    StairUp1 = false;
+                }
+                else if(StairUp2 == true){
+                    if(Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawn2") != null)
+                    {
+                        Transform playerSpawnPoint = Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawn2");
+                        playerInstance = Instantiate(playerPrefab, playerSpawnPoint.position, Quaternion.identity);
+                    }
+                    StairUp2 = false;
+                }
+                else if(StairDown1 == true){
+                    if(Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawnD1") != null)
+                    {
+                        Transform playerSpawnPoint = Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawnD1");
+                        playerInstance = Instantiate(playerPrefab, playerSpawnPoint.position, Quaternion.identity);
+                    }
+                    StairDown1 = false;
+                }
+                else if(StairDown2 == true){
+                    if(Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawnD2") != null)
+                    {
+                        Transform playerSpawnPoint = Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawnD2");
+                        playerInstance = Instantiate(playerPrefab, playerSpawnPoint.position, Quaternion.identity);
+                    }
+                    StairDown2 = false;
+                }
             }
 
-            Transform enemySpawnPoint = Floors[GameManager.Instance.currentFloor].transform.Find("EnemySpawn");
-            if (enemySpawnPoint != null)
+            if(Floors[GameManager.Instance.currentFloor].transform.Find("EnemySpawn") != null)
             {
+                Transform enemySpawnPoint = Floors[GameManager.Instance.currentFloor].transform.Find("EnemySpawn");
                 enemyInstance = Instantiate(enemyPrefab, enemySpawnPoint.position, Quaternion.identity);
             }
         }
     }
 
-    public void DestroyPlayerAndEnemy()
+    private void DestroyPlayerAndEnemy()
     {
-        if (GameManager.Instance.currentFloor < Floors.Length)
+        if (GameManager.Instance.currentFloor >= 0 && GameManager.Instance.currentFloor < Floors.Length)
         {
             if (playerInstance != null)
             {
@@ -96,18 +179,136 @@ public class TowerManager : MonoBehaviour
         
     }
 
+    public void StairUp(int StairNumber)
+    {
+        if(floorSwitch[GameManager.Instance.currentFloor] == true){
+            if (StairNumber == 1){
+                StairUp1 = true;
+            }
+            else if (StairNumber == 2){
+                StairUp2 = true;
+            }
+            goNextFloor();
+        }else{
+            Debug.Log("Switch is not completed!");
+        }
+        
+    }
+
+    public void StairDown(int StairNumber)
+    {
+        if(GameManager.Instance.currentFloor > 0){
+            if (StairNumber == 1){
+                StairDown1 = true;
+            }
+            else if (StairNumber == 2){
+                StairDown2 = true;
+            }
+            goPreviousFloor();
+        }
+        
+    }
+
+    public void CheckStairClick()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            bool isClickable = true;
+            isClickable = CheckStair(Floors[GameManager.Instance.currentFloor].transform.Find("StairUpPoint1"), "Up", 1, mousePosition, isClickable);
+            isClickable = CheckStair(Floors[GameManager.Instance.currentFloor].transform.Find("StairUpPoint2"), "Up", 2, mousePosition, isClickable);
+            
+            isClickable = CheckStair(Floors[GameManager.Instance.currentFloor].transform.Find("StairDownPoint1"), "Down", 1, mousePosition, isClickable);
+            isClickable = CheckStair(Floors[GameManager.Instance.currentFloor].transform.Find("StairDownPoint2"), "Down", 2, mousePosition, isClickable);
+            
+                
+        }
+    }
+
+    public bool CheckStair(Transform stairTransform, string StairDirection, int stairNumber, Vector3 mousePosition,bool isClickable)
+    {
+        if(isClickable == false){
+            return false;
+        }
+
+        if (stairTransform != null)
+        {
+            
+            Vector3 stairPosition = stairTransform.position;
+            Vector3.Distance(playerInstance.transform.position, mousePosition);
+            float disPlayer_Mouse = Vector3.Distance(playerInstance.transform.position, stairPosition);
+            if(disPlayer_Mouse >= 2.0f){
+                return true;
+            }
+            Debug.Log("Click!" + StairDirection);
+            float disPlayer_Stair = Vector3.Distance(playerInstance.transform.position, stairPosition);
+
+            if (disPlayer_Stair <= 2.0f)
+            {
+                
+                if (StairDirection == "Down")
+                {
+                    Debug.Log("StairDown!");
+                    StairDown(stairNumber);
+                }
+                else if (StairDirection == "Up")
+                {
+                    Debug.Log("StairUp!");
+                    StairUp(stairNumber);
+                }
+            }
+            return false;
+        }
+        return true;
+    }
+
+    public void SwitchCompleted()
+    {
+        floorSwitch[GameManager.Instance.currentFloor] = true;
+    }
+
     public void CheckCompletedTower()
     {
         if (GameManager.Instance.currentFloor == Floors.Length - 1)
         {
-            GameManager.Instance.isCompletedForTower = true;
+            if (GameManager.Instance.currentTower == "For")
+            {
+                GameManager.Instance.isCompletedForTower = true;
+            }
+            else if (GameManager.Instance.currentTower == "While")
+            {
+                GameManager.Instance.isCompletedWhileTower = true;
+            }
+            else if (GameManager.Instance.currentTower == "DoWhile")
+            {
+                GameManager.Instance.isCompletedDoWhileTower = true;
+            }
+            else if (GameManager.Instance.currentTower == "Master")
+            {
+                GameManager.Instance.isCompletedMasterTower = true;
+            }
             SceneManager.LoadScene("SelectStage");
         }
     }
 
     public void CompleteTower()
     {
-        GameManager.Instance.isCompletedForTower = true;
+        if (GameManager.Instance.currentTower == "For")
+        {
+            GameManager.Instance.isCompletedForTower = true;
+        }
+        else if (GameManager.Instance.currentTower == "While")
+        {
+            GameManager.Instance.isCompletedWhileTower = true;
+        }
+        else if (GameManager.Instance.currentTower == "DoWhile")
+        {
+            GameManager.Instance.isCompletedDoWhileTower = true;
+        }
+        else if (GameManager.Instance.currentTower == "Master")
+        {
+            GameManager.Instance.isCompletedMasterTower = true;
+        }
         SceneManager.LoadScene("SelectStage");
     }
 }
