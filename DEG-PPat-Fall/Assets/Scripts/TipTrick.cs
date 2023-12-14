@@ -16,6 +16,7 @@ public class TipTrick : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 0f;
+        topicList = GameObject.Find("TowerManager").GetComponent<TowerManager>().topicList;
         foreach (string topic in topicList)
         {
             GameObject spawnedTopicButton = Instantiate(topicButtonPrefab, topicTransform);
@@ -59,7 +60,7 @@ public class TipTrick : MonoBehaviour
         {
             Destroy(newContentPanel);
         }
-        GameObject selectedPanel = contentPanelPrefab.Find(x => x.name == topic);
+        GameObject selectedPanel = GameManager.Instance.allReadableFileContent.Find(x => x.name == topic);
         Debug.Log(selectedPanel.name);
         newContentPanel = Instantiate(selectedPanel, canvasTransform);
     }

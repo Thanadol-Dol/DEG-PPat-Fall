@@ -26,7 +26,6 @@ public class Player : MonoBehaviour
     private bool isPlacingTrap;
     private float timeHoldingIncreaseKey;
     private int trapNumber;
-    public List<GameObject> trapSetupPanelPrefabs = new List<GameObject>();
     private int currentTrapPanelNumber;
     private GameObject previewTrap;
 
@@ -40,16 +39,14 @@ public class Player : MonoBehaviour
 
     public bool canSeeEnemyStatus;
     public bool isGrabByEnemy;
-    public string currentTower;
-    public string currentDifficulty;
-    public int currentLevel;
 
     public Slider craftTime;
     public Slider staminaBar;
 
     public TextMeshProUGUI materials;
     public TextMeshProUGUI trap_C;
-    
+    public bool isReadableFilePanelOpen;
+    private TowerManager towerManager;
 
     void Start()
     {
@@ -65,20 +62,18 @@ public class Player : MonoBehaviour
         timeHoldingIncreaseKey = 0f;
         trapNumber = 0;
         trapMaterial = 12;
-        currentTrapPanelNumber = Random.Range(0, trapSetupPanelPrefabs.Count);
+        towerManager = GameObject.Find("TowerManager").GetComponent<TowerManager>();
+        currentTrapPanelNumber = Random.Range(0, towerManager.trapSetupPanelPrefabs.Count);
         isTrapPanelOpen = false;
         isTipTrickPanelOpen = false;
+        isReadableFilePanelOpen = false;
         tipTrickPanelCooldown = false;
         tipTrickPanelCooldownTime = 0.5f;
         canvas = GameObject.Find("Canvas");
         canSeeEnemyStatus = true;
         isGrabByEnemy = false;
-        currentTower = "While";
-        currentDifficulty = "Normal";
-        currentLevel = 2;
         materials.text = trapMaterial.ToString();
         trap_C.text = trapNumber.ToString();
-        
     }
 
     void Update()
@@ -138,7 +133,6 @@ public class Player : MonoBehaviour
                     Debug.Log("trapMaterial remaining: " + trapMaterial);
 
                     timeHoldingIncreaseKey = 0f;
-                    
                 }
                 else
                 {
@@ -159,11 +153,9 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.Q))
         {
             if (!isPlacingTrap)
-            {   
-                
+            {
                 isPlacingTrap = true;
                 previewTrap = Instantiate(previewTrapPrefab, transform.position, Quaternion.identity);
-                
             }
 
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -197,12 +189,12 @@ public class Player : MonoBehaviour
                 GameObject trap = Instantiate(trapPrefab, mousePosition, Quaternion.identity);
                 Trap trapScript = trap.GetComponent<Trap>();
                 trapScript.puzzleNumber = currentTrapPanelNumber;
-                trapScript.trapSetupPanelPrefab = trapSetupPanelPrefabs[currentTrapPanelNumber];
+                trapScript.trapSetupPanelPrefab = towerManager.trapSetupPanelPrefabs[currentTrapPanelNumber];
                 if (currentTrapPanelNumber >= 3 && currentTrapPanelNumber <= 8)
                 {
                     trapScript.extraNumber = Random.Range(5, 37);
                 }
-                currentTrapPanelNumber = Random.Range(0, trapSetupPanelPrefabs.Count);
+                currentTrapPanelNumber = Random.Range(0, towerManager.trapSetupPanelPrefabs.Count);
                 trapNumber--;
                 trap_C.text = trapNumber.ToString();
             }
@@ -221,7 +213,7 @@ public class Player : MonoBehaviour
 
     void ToggleTipTrickPanel()
     {
-        if (Input.GetKey(KeyCode.T) && !isTrapPanelOpen && canvas != null && !tipTrickPanelCooldown)
+        if (Input.GetKey(KeyCode.T) && !isTrapPanelOpen && !isReadableFilePanelOpen && canvas != null && !tipTrickPanelCooldown)
         {
             if (!isTipTrickPanelOpen)
             {
@@ -242,6 +234,4 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(tipTrickPanelCooldownTime);
         tipTrickPanelCooldown = false;
     }
-
-    
 }
