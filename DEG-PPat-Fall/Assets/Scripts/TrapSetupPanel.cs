@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TrapSetupPanel : MonoBehaviour
 {
@@ -8,11 +9,15 @@ public class TrapSetupPanel : MonoBehaviour
     public Button setupButton;
     public List<AnswerSlot> answerSlots = new List<AnswerSlot>();
     private List<string> answers = new List<string>();
+    public TextMeshProUGUI trapExtraNumberText;
 
     private void Start()
     {
         setupButton.interactable = false;
         Time.timeScale = 0f;
+        if(trap.extraNumber != null){
+            trapExtraNumberText.text = "int y = " + trap.extraNumber.ToString();
+        }
     }
 
     private void Update()
