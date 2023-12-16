@@ -188,12 +188,7 @@ public class Player : MonoBehaviour
 
                 GameObject trap = Instantiate(trapPrefab, mousePosition, Quaternion.identity);
                 Trap trapScript = trap.GetComponent<Trap>();
-                trapScript.puzzleNumber = currentTrapPanelNumber;
                 trapScript.trapSetupPanelPrefab = towerManager.trapSetupPanelPrefabs[currentTrapPanelNumber];
-                if (currentTrapPanelNumber >= 3 && currentTrapPanelNumber <= 8)
-                {
-                    trapScript.extraNumber = Random.Range(5, 37);
-                }
                 currentTrapPanelNumber = Random.Range(0, towerManager.trapSetupPanelPrefabs.Count);
                 trapNumber--;
                 trap_C.text = trapNumber.ToString();
