@@ -104,7 +104,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            stamina += Time.deltaTime;
+            stamina += Time.deltaTime * 10.0f;
             stamina = Mathf.Clamp(stamina, 0f, 100f);
             staminaBar.value = stamina;
         }
