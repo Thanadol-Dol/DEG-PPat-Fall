@@ -417,15 +417,15 @@ public class TowerManager : MonoBehaviour
                 GameObject switchPanel = Instantiate(switchPanelPrefab[GameManager.Instance.currentFloor], canvas.transform);
 
                 // Pass a reference to the trap to the panel
-                SwitchPanel panelScript = switchPanel.GetComponent<SwitchPanel>();
-                if (panelScript != null)
-                {
-                    //panelScript.SetTrapReference(this);
-                }
-                else
-                {
-                    Debug.LogError("switchPanel script not found on the panel prefab.");
-                }
+                //SwitchPanel panelScript = switchPanel.GetComponent<SwitchPanel>();
+                // if (panelScript != null)
+                // {
+                //     //panelScript.SetTrapReference(this);
+                // }
+                // else
+                // {
+                //     Debug.LogError("switchPanel script not found on the panel prefab.");
+                // }
             }
             else
             {
