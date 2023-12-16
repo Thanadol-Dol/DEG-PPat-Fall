@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text.RegularExpressions;
 
 public class Trap : MonoBehaviour
 {
@@ -18,6 +19,11 @@ public class Trap : MonoBehaviour
     {
         pickupRange = 2f;
         isSetup = false;
+        puzzleNumber = int.Parse(Regex.Replace(trapSetupPanelPrefab.name, "TrapPanel", ""));
+        if (puzzleNumber >= 3 && puzzleNumber <= 8)
+        {
+            extraNumber = Random.Range(5, 37);
+        }
     }
 
     private void OnMouseDown()
@@ -129,34 +135,60 @@ public class Trap : MonoBehaviour
         float timeToLive = 0f;
         string currentDifficulty = GameManager.Instance.difficulty;
         int currentLevel = GameManager.Instance.currentLevel;
-        if(currentDifficulty.Equals("Beginner")){
-            if(currentLevel == 1){
+        if (currentDifficulty.Equals("Beginner"))
+        {
+            if (currentLevel == 1)
+            {
                 return;
-            } else if(currentLevel == 2){
+            }
+            else if (currentLevel == 2)
+            {
                 timeToLive = 12.0f;
-            } else if(currentLevel == 3){
-                timeToLive = 10.0f;
-            } else if(currentLevel == 4){
+            }
+            else if (currentLevel == 3)
+            {
                 timeToLive = 10.0f;
             }
-        } else if(currentDifficulty.Equals("Normal")){
-            if(currentLevel == 1){
+            else if (currentLevel == 4)
+            {
+                timeToLive = 10.0f;
+            }
+        }
+        else if (currentDifficulty.Equals("Normal"))
+        {
+            if (currentLevel == 1)
+            {
                 return;
-            } else if(currentLevel == 2){
+            }
+            else if (currentLevel == 2)
+            {
                 timeToLive = 10.0f;
-            } else if(currentLevel == 3){
-                timeToLive = 8.0f;
-            } else if(currentLevel == 4){
+            }
+            else if (currentLevel == 3)
+            {
                 timeToLive = 8.0f;
             }
-        } else {
-            if(currentLevel == 1){
-                timeToLive = 10.0f;
-            } else if(currentLevel == 2){
+            else if (currentLevel == 4)
+            {
                 timeToLive = 8.0f;
-            } else if(currentLevel == 3){
+            }
+        }
+        else
+        {
+            if (currentLevel == 1)
+            {
+                timeToLive = 10.0f;
+            }
+            else if (currentLevel == 2)
+            {
+                timeToLive = 8.0f;
+            }
+            else if (currentLevel == 3)
+            {
                 timeToLive = 6.0f;
-            } else if(currentLevel == 4){
+            }
+            else if (currentLevel == 4)
+            {
                 timeToLive = 6.0f;
             }
         }

@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public bool isCompletedIntro;
     public static GameManager Instance;
 
+    //Trap Setup Panel
     public List<GameObject> easyTrapSetupPanel = new List<GameObject>();
     public List<GameObject> mediumTrapSetupPanel = new List<GameObject>();
     public List<GameObject> hardTrapSetupPanel = new List<GameObject>();
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     public GameObject forTrapSetupPanel;
     public GameObject doWhileTrapSetupPanel;
 
+    //Readble File Content
     public List<GameObject> easyReadableFileContent = new List<GameObject>();
     public GameObject mediumReadableFileContent;
     public GameObject hardReadableFileContent;
@@ -32,7 +34,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> doWhileReadableFileContent = new List<GameObject>();
     public List<GameObject> allReadableFileContent = new List<GameObject>();
     
-
+    //Readble File Puzzle Panel
     public List<GameObject> easyReadableFilePanel = new List<GameObject>();
     public GameObject mediumReadableFilePanel;
     public GameObject hardReadableFilePanel;
