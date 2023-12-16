@@ -8,9 +8,10 @@ public class Floor : MonoBehaviour
     public Tilemap baseTilemap;
     public Tilemap wallTilemap;
     public Tilemap[] stairUpTilemap;
-    public Tilemap[] stairDownTilemap;
+    public Tilemap[] stairUpActiveTilemap;
+    //public Tilemap[] stairDownTilemap;
     public Tilemap switchTilemap;
-
+    public Tilemap switchActiveTilemap;
     public void SetupTilemaps()
     {
         TileBase baseTile = Resources.Load<TileBase>("Base");
@@ -29,35 +30,71 @@ public class Floor : MonoBehaviour
             index++;
         }
 
-        index = 1;
+        /*index = 1;
         foreach (Tilemap stairDown in stairDownTilemap)
         {
             string str = "StairDown" + index;
             TileBase stairDownTile = Resources.Load<TileBase>(str);
             stairDown.SetTile(new Vector3Int(0, 0, 0), stairDownTile);
             index++;
+        }*/
+
+        index = 1;
+        foreach (Tilemap stairUpActive in stairUpActiveTilemap)
+        {
+            string str = "StairUpActive" + index;
+            TileBase StairUpActiveTile = Resources.Load<TileBase>(str);
+            stairUpActive.SetTile(new Vector3Int(0, 0, 0), StairUpActiveTile);
+            index++;
         }
 
         TileBase switchTile = Resources.Load<TileBase>("Switch");
         switchTilemap.SetTile(new Vector3Int(0, 0, 0), switchTile);
+
+        TileBase switchActiveTile = Resources.Load<TileBase>("SwitchActive");
+        switchActiveTilemap.SetTile(new Vector3Int(0, 0, 0), switchActiveTile);
     }
     // Function to clear the tilemaps
     public void ClearTilemaps()
     {
         baseTilemap.ClearAllTiles();
         wallTilemap.ClearAllTiles();
-        foreach (Tilemap stairUp in stairUpTilemap)
-        {
-            stairUp.ClearAllTiles();
+        if(stairUpTilemap != null){
+            foreach (Tilemap stairUp in stairUpTilemap)
+            {
+                stairUp.ClearAllTiles();
+            }
         }
-        foreach (Tilemap stairDown in stairDownTilemap)
+        if(stairUpActiveTilemap != null){
+            foreach (Tilemap stairUpActive in stairUpActiveTilemap)
+            {
+                stairUpActive.ClearAllTiles();
+            }
+        }
+        /*foreach (Tilemap stairDown in stairDownTilemap)
         {
             stairDown.ClearAllTiles();
-        }
+        }*/
         if(switchTilemap != null){
             switchTilemap.ClearAllTiles();
         }
     }
 
+    public void ReplaceStairUp()
+    {
+        if(stairUpTilemap != null){
+            foreach (Tilemap stairUp in stairUpTilemap)
+            {
+                stairUp.ClearAllTiles();
+            }
+        }
+    }
+
+    public void ReplaceSwitch()
+    {
+        if(switchTilemap != null){
+            switchTilemap.ClearAllTiles();
+        }
+    }
     
 }
