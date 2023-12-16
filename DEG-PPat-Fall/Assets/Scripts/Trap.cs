@@ -19,7 +19,7 @@ public class Trap : MonoBehaviour
     {
         pickupRange = 2f;
         isSetup = false;
-        puzzleNumber = int.Parse(Regex.Replace(trapSetupPanelPrefab.name, "TrapPanel", ""));
+        puzzleNumber = int.Parse(Regex.Replace(trapSetupPanelPrefab.name, "TrapPanel", "")) - 1;
         if (puzzleNumber >= 3 && puzzleNumber <= 8)
         {
             extraNumber = Random.Range(5, 37);

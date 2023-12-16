@@ -83,9 +83,9 @@ public class ReadableFilePanel : MonoBehaviour
                 Debug.Log(answer);
             }
             file.answers = answers;
-            file.CheckAnswer();
             Player playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             playerScript.isReadableFilePanelOpen = false;
+            file.CheckAnswer();
             // Destroy the panel
             Destroy(gameObject);
         }

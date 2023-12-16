@@ -1,18 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ReadableFile : MonoBehaviour
 {
     public float pickupRange;
-    public GameObject filePanel;
+    private GameObject filePanel;
     public GameObject fileContent;
+    TowerManager towerManager = null;
 
     public List<string> answers = new List<string>();
 
-    private void Start()
+    private IEnumerator Start()
     {
         pickupRange = 2f;
+        yield return StartCoroutine(WaitForTowerManagerInitialization());
+
+        // Now you can access towerManager.fileNameToContent dictionary
+        filePanel = GameManager.Instance.allReadableFilePanel
+            .FirstOrDefault(x => x.name == towerManager.fileNameToContent[fileContent.name]);
+    }
+
+    private IEnumerator WaitForTowerManagerInitialization()
+    {
+
+        while (towerManager == null)
+        {
+            towerManager = GameObject.Find("TowerManager")?.GetComponent<TowerManager>();
+            yield return null; // Wait for the next frame
+        }
+        // TowerManager is now initialized
     }
 
     private void OnMouseDown()
@@ -99,10 +117,13 @@ public class ReadableFile : MonoBehaviour
     {
         PuzzleCalculator puzzleCalculator = GameObject.Find("PuzzleCalculator").GetComponent<PuzzleCalculator>();
         bool canAdd = puzzleCalculator.AddingFileCalculate(answers, fileContent.name);
-        if(canAdd)
+        Debug.Log(answers[0]);
+        Debug.Log(fileContent.name);
+        if (canAdd)
         {
             TowerManager towerManager = GameObject.Find("TowerManager").GetComponent<TowerManager>();
             towerManager.AddTopic(fileContent.name);
+            Destroy(this.gameObject);
         }
         else
         {
