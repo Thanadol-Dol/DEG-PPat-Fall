@@ -10,8 +10,10 @@ public class TowerManager : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
     public GameObject[] Floors;
+    public GameObject[] switchPanelPrefab;
     private GameObject playerInstance;
     private GameObject enemyInstance;
+    public float pickupRange;
 
     private bool StairUp1 = false;
     private bool StairUp2 = false;
@@ -87,13 +89,15 @@ public class TowerManager : MonoBehaviour
         {
             Floors[i].SetActive(false);
         }
+        SetActiveValue(false);
         FindSpawnPoint();
+
 
         for (int i = 0; i < Floors.Length; i++)
         {
             floorSwitch.Add(false);
         }
-        floorSwitch[0] = true;
+        pickupRange = 2.0f;
     }
 
     // Update is called once per frame
@@ -131,6 +135,25 @@ public class TowerManager : MonoBehaviour
         FindSpawnPoint();
     }
 
+    private void SetActiveValue(bool value){
+        GameObject currentFloor = Floors[GameManager.Instance.currentFloor];
+        Transform SU1 = currentFloor.transform.Find("StairUpActive1");
+        Transform SU2 = currentFloor.transform.Find("StairUpActive2");
+        Transform SA = currentFloor.transform.Find("SwitchActiveTilemap");
+        if(SU1 != null){
+            SU1.gameObject.SetActive(value);
+        }
+        if(SU2 != null){
+            SU2.gameObject.SetActive(value);
+        }
+        if(SA != null){
+            SA.gameObject.SetActive(value);
+        }
+        //Floors[GameManager.Instance.currentFloor].Find("StairUpActive2");
+        //Floors[GameManager.Instance.currentFloor].Find("SwitchActiveTilemap");
+
+    }
+
     private void NextFloor()
     {
         if (GameManager.Instance.currentFloor < Floors.Length - 1)
@@ -142,6 +165,7 @@ public class TowerManager : MonoBehaviour
             Debug.Log("Current Floor : " + GameManager.Instance.currentFloor);
             Floors[GameManager.Instance.currentFloor].GetComponent<Floor>().SetupTilemaps();
             Floors[GameManager.Instance.currentFloor].SetActive(true);
+            SetActiveValue(false);
         }
         else
         {
@@ -328,10 +352,8 @@ public class TowerManager : MonoBehaviour
             Debug.Log("Click!" + StairDirection);
             float disPlayer_Stair = Vector3.Distance(playerInstance.transform.position, stairPosition);
 
-            if (disPlayer_Stair <= 2.0f)
+            if (disPlayer_Stair <= pickupRange)
             {
-
-
                 if (StairDirection == "Up")
                 {
                     Debug.Log("StairUp!");
@@ -350,6 +372,9 @@ public class TowerManager : MonoBehaviour
 
     public void SwitchCompleted()
     {
+        ChangeFloorSwitch();
+        ChangeStairUp();
+        SetActiveValue(true);
         floorSwitch[GameManager.Instance.currentFloor] = true;
         if (floorSwitch[GameManager.Instance.currentFloor] && GameManager.Instance.currentFloor == Floors.Length - 1)
         {
@@ -370,15 +395,56 @@ public class TowerManager : MonoBehaviour
                 //if(disPlayer_Mouse <= 1.0f){
                 float disPlayer_Switch = Vector3.Distance(playerInstance.transform.position, switchPosition);
 
-                if (disPlayer_Switch <= 1.3f)
+                if (disPlayer_Switch <= pickupRange)
                 {
-                    SwitchCompleted();
+                    ShowSwitchPanel();
                     Debug.Log("Switch Completed!");
                 }
 
                 //}
             }
         }
+    }
+
+    private void ShowSwitchPanel()
+    {
+        if (switchPanelPrefab != null)
+        {
+            GameObject canvas = GameObject.Find("Canvas");
+            if (canvas != null)
+            {
+                // Instantiate a unique panel for each trap
+                GameObject switchPanel = Instantiate(switchPanelPrefab[GameManager.Instance.currentFloor], canvas.transform);
+
+                // Pass a reference to the trap to the panel
+                SwitchPanel panelScript = switchPanel.GetComponent<SwitchPanel>();
+                if (panelScript != null)
+                {
+                    //panelScript.SetTrapReference(this);
+                }
+                else
+                {
+                    Debug.LogError("switchPanel script not found on the panel prefab.");
+                }
+            }
+            else
+            {
+                Debug.LogError("Canvas not found in the scene.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Switch panel prefab is not assigned in the inspector.");
+        }
+    }
+
+    public void ChangeFloorSwitch()
+    {
+        Floors[GameManager.Instance.currentFloor].GetComponent<Floor>().ReplaceSwitch();
+    }
+
+    public void ChangeStairUp(){
+        Floors[GameManager.Instance.currentFloor].GetComponent<Floor>().ReplaceStairUp();
     }
 
     public void CheckCompletedTower()
