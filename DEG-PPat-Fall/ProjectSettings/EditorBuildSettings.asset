@@ -7,7 +7,7 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    guid: e08ead213905ccd4bb4312629f4c3561
   - enabled: 1
     path: Assets/Scenes/NewGame.unity
     guid: d42d14f1c743ea34fbabed5029c37ebb
@@ -24,15 +24,15 @@ EditorBuildSettings:
     path: Assets/Scenes/WhileTower.unity
     guid: 10b6b58fc754e6e48a5ba3f50c56b35f
   - enabled: 1
-    path: Assets/Scenes/DoWhileTower.unity
-    guid: f12e486b2284eca43b5b22e5cb06e8ad
-  - enabled: 1
     path: Assets/Scenes/LoadGame.unity
     guid: 7b50a1f308d9b584f90653d4622d13f9
   - enabled: 1
-    path: Assets/Scenes/Setting.unity
-    guid: a7398bf4d98fab74e9c51fd3dccad3c8
+    path: Assets/Scenes/DoWhileTower.unity
+    guid: f12e486b2284eca43b5b22e5cb06e8ad
   - enabled: 1
+    path: Assets/Scenes/Setting.unity
+    guid: beb59f56d04a88647aa42e949c3f6b3e
+  - enabled: 0
     path: Assets/Scenes/PlayerTest.unity
     guid: 9e87d0c8fab5895418534163890636df
   - enabled: 1
