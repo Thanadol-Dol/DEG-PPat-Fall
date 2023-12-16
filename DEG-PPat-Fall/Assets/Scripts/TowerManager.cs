@@ -20,10 +20,14 @@ public class TowerManager : MonoBehaviour
     private List<bool> floorSwitch = new List<bool>();
     public List<GameObject> trapSetupPanelPrefabs = new List<GameObject>();
     public List<string> topicList = new List<string>();
+    public Dictionary<string, int> filePuzzleConverter = new Dictionary<string, int>();
+    public Dictionary<string, string> fileNameToContent = new Dictionary<string, string>();
 
     // Start is called before the first frame update
     void Start()
     {
+        FileNameToContent();
+        ListAllFilePuzzle();
         //Trap Setup Panel
         if (GameManager.Instance.currentLevel >= 1)
         {
@@ -441,5 +445,82 @@ public class TowerManager : MonoBehaviour
     public void AddTopic(string topic)
     {
         topicList.Add(topic);
+    }
+
+    public void ListAllFilePuzzle()
+    {
+        filePuzzleConverter.Add("Easy1",1);
+        filePuzzleConverter.Add("Easy2",2);
+        filePuzzleConverter.Add("Easy3",3);
+        filePuzzleConverter.Add("Easy4",4);
+        filePuzzleConverter.Add("Easy5",5);
+        filePuzzleConverter.Add("Medium1",6);
+        filePuzzleConverter.Add("Hard1",7);
+        if(GameManager.Instance.currentLevel <= 2)
+        {
+            filePuzzleConverter.Add("For1",8);
+            filePuzzleConverter.Add("For2",9);
+            filePuzzleConverter.Add("For3",10);
+            filePuzzleConverter.Add("For4",11);
+            filePuzzleConverter.Add("While1",16);
+            filePuzzleConverter.Add("While2",17);
+            filePuzzleConverter.Add("While3",18);
+            filePuzzleConverter.Add("While4",19);
+            filePuzzleConverter.Add("DoWhile1",24);
+            filePuzzleConverter.Add("DoWhile2",25);
+            filePuzzleConverter.Add("DoWhile3",26);
+            filePuzzleConverter.Add("DoWhile4",27);   
+        } else {
+            filePuzzleConverter.Add("For1",12);
+            filePuzzleConverter.Add("For2",13);
+            filePuzzleConverter.Add("For3",14);
+            filePuzzleConverter.Add("For4",15);
+            filePuzzleConverter.Add("While1",20);
+            filePuzzleConverter.Add("While2",21);
+            filePuzzleConverter.Add("While3",22);
+            filePuzzleConverter.Add("While4",23);
+            filePuzzleConverter.Add("DoWhile1",28);
+            filePuzzleConverter.Add("DoWhile2",29);
+            filePuzzleConverter.Add("DoWhile3",30);
+            filePuzzleConverter.Add("DoWhile4",31);   
+        }
+    }
+    public void FileNameToContent()
+    {
+        fileNameToContent.Add("Easy1","Easy1");
+        fileNameToContent.Add("Easy2","Easy2");
+        fileNameToContent.Add("Easy3","Easy3");
+        fileNameToContent.Add("Easy4","Easy4");
+        fileNameToContent.Add("Easy5","Easy5");
+        fileNameToContent.Add("Medium1","Medium1");
+        fileNameToContent.Add("Hard1","Hard1");
+        if(GameManager.Instance.currentLevel <= 2)
+        {
+            fileNameToContent.Add("For1","ForNormal1");
+            fileNameToContent.Add("For2","ForNormal2");
+            fileNameToContent.Add("For3","ForNormal3");
+            fileNameToContent.Add("For4","ForNormal4");
+            fileNameToContent.Add("While1","WhileNormal1");
+            fileNameToContent.Add("While2","WhileNormal2");
+            fileNameToContent.Add("While3","WhileNormal3");
+            fileNameToContent.Add("While4","WhileNormal4");
+            fileNameToContent.Add("DoWhile1","DoWhileNormal1");
+            fileNameToContent.Add("DoWhile2","DoWhileNormal2");
+            fileNameToContent.Add("DoWhile3","DoWhileNormal3");
+            fileNameToContent.Add("DoWhile4","DoWhileNormal4");   
+        } else {
+            fileNameToContent.Add("For1","ForHard1");
+            fileNameToContent.Add("For2","ForHard2");
+            fileNameToContent.Add("For3","ForHard3");
+            fileNameToContent.Add("For4","ForHard4");
+            fileNameToContent.Add("While1","WhileHard1");
+            fileNameToContent.Add("While2","WhileHard2");
+            fileNameToContent.Add("While3","WhileHard3");
+            fileNameToContent.Add("While4","WhileHard4");
+            fileNameToContent.Add("DoWhile1","DoWhileHard1");
+            fileNameToContent.Add("DoWhile2","DoWhileHard2");
+            fileNameToContent.Add("DoWhile3","DoWhileHard3");
+            fileNameToContent.Add("DoWhile4","DoWhileHard4");   
+        }
     }
 }

@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
     public List<GameObject> whileReadableFilePanelHard = new List<GameObject>();
     public List<GameObject> forReadableFilePanelHard = new List<GameObject>();
     public List<GameObject> doWhileReadableFilePanelHard = new List<GameObject>();
+    public List<GameObject> allReadableFilePanel = new List<GameObject>();
+    public Dictionary<string, string> topicConverter = new Dictionary<string, string>();
     void Awake(){
         allReadableFileContent.AddRange(easyReadableFileContent);
         allReadableFileContent.Add(mediumReadableFileContent);
@@ -51,6 +53,17 @@ public class GameManager : MonoBehaviour
         allReadableFileContent.AddRange(whileReadableFileContent);
         allReadableFileContent.AddRange(forReadableFileContent);
         allReadableFileContent.AddRange(doWhileReadableFileContent);
+
+        allReadableFilePanel.AddRange(easyReadableFilePanel);
+        allReadableFilePanel.Add(mediumReadableFilePanel);
+        allReadableFilePanel.Add(hardReadableFilePanel);
+        allReadableFilePanel.AddRange(whileReadableFilePanel);
+        allReadableFilePanel.AddRange(forReadableFilePanel);
+        allReadableFilePanel.AddRange(doWhileReadableFilePanel);
+        allReadableFilePanel.AddRange(whileReadableFilePanelHard);
+        allReadableFilePanel.AddRange(forReadableFilePanelHard);
+        allReadableFilePanel.AddRange(doWhileReadableFilePanelHard);
+        ListAllTopic();
         if (Instance == null)
         {
             Instance = this;
@@ -62,4 +75,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ListAllTopic()
+    {
+        topicConverter.Add("While1","Tower Mechanism");
+        topicConverter.Add("While2","Puzzle Mechanism");
+        topicConverter.Add("While3","Information#1");
+        topicConverter.Add("While4","Information#2");
+        topicConverter.Add("DoWhile1","Tower Mechanism");
+        topicConverter.Add("DoWhile2","Puzzle Mechanism");
+        topicConverter.Add("DoWhile3","Information#1");
+        topicConverter.Add("DoWhile4","Information#2");
+        topicConverter.Add("For1","Tower Mechanism");
+        topicConverter.Add("For2","Puzzle Mechanism");
+        topicConverter.Add("For3","Information#1");
+        topicConverter.Add("For4","Information#2");
+        topicConverter.Add("Easy1","Basic Condition");
+        topicConverter.Add("Easy2","Trap Crarfting");
+        topicConverter.Add("Easy3","Trap Placing");
+        topicConverter.Add("Easy4","Trap Setting");
+        topicConverter.Add("Easy5","Switch Mechanism");
+        topicConverter.Add("Medium1","Nested Condition");
+        topicConverter.Add("Hard1","Complex Condition");
+    }
 }

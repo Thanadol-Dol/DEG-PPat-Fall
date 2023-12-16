@@ -20,7 +20,7 @@ public class TipTrick : MonoBehaviour
         foreach (string topic in topicList)
         {
             GameObject spawnedTopicButton = Instantiate(topicButtonPrefab, topicTransform);
-            spawnedTopicButton.transform.Find("TopicName").GetComponent<TMPro.TextMeshProUGUI>().text = topic;
+            spawnedTopicButton.transform.Find("TopicName").GetComponent<TMPro.TextMeshProUGUI>().text = GameManager.Instance.topicConverter[topic];
             Button buttonComponent = spawnedTopicButton.GetComponent<Button>();
             if (buttonComponent != null)
             {
@@ -31,9 +31,7 @@ public class TipTrick : MonoBehaviour
             {
                 Debug.LogError("Button Component not found");
             }
-
         }
-
     }
 
     public void CloseTipTrickPanel()
