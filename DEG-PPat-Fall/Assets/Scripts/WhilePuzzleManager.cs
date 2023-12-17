@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
+using TMPro;
 
 public class WhilePuzzleManager : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class WhilePuzzleManager : MonoBehaviour
 
     public Image pickedColor;
     public Image pickedColor2;
+    public TextMeshProUGUI countdownText;
+    public TextMeshProUGUI roundSuccess;
 
     public int winningRound = 3;
 
@@ -39,8 +42,11 @@ public class WhilePuzzleManager : MonoBehaviour
     {
         while (countdownTime > 0)
         {
-            yield return new WaitForSeconds(1f);
-            countdownTime--;
+            yield return new WaitForSeconds(0.1f);  // Reduce the delay to 0.1 seconds
+            countdownTime -= 0.1f;  // Update the countdown time more frequently
+
+            // Update countdownText during the countdown
+            countdownText.text = "Time: " + Mathf.Ceil(countdownTime).ToString();  // Round up to the nearest second for display
         }
 
         // Countdown has reached zero, you can handle the event here
@@ -48,37 +54,40 @@ public class WhilePuzzleManager : MonoBehaviour
         ResetGame();
     }
 
+
     // Start is called before the first frame update
     public void CollectColor(string color)
     {
         collectedColor++;
         primaryColor[color] = true;
-        if(collectedColor == 1){
+        if (collectedColor == 1)
+        {
             if (color.Equals("Red"))
             {
-                pickedColor.color = new Color(255f, 0f, 0f,1f);
+                pickedColor.color = new Color(255f, 0f, 0f, 1f);
             }
             else if (color.Equals("Green"))
             {
-                pickedColor.color = new Color(0f, 255f, 0f,1f);
+                pickedColor.color = new Color(0f, 255f, 0f, 1f);
             }
             else if (color.Equals("Blue"))
             {
-                pickedColor.color = new Color(0f, 0f, 255f,1f);
+                pickedColor.color = new Color(0f, 0f, 255f, 1f);
             }
         }
-        if(targetColor["White"] && collectedColor == 2){
+        if (targetColor["White"] && collectedColor == 2)
+        {
             if (color.Equals("Red"))
             {
-                pickedColor2.color = new Color(255f, 0f, 0f,1f);
+                pickedColor2.color = new Color(255f, 0f, 0f, 1f);
             }
             else if (color.Equals("Green"))
             {
-                pickedColor2.color = new Color(0f, 255f, 0f,1f);
+                pickedColor2.color = new Color(0f, 255f, 0f, 1f);
             }
             else if (color.Equals("Blue"))
             {
-                pickedColor2.color = new Color(0f, 0f, 255f,1f);
+                pickedColor2.color = new Color(0f, 0f, 255f, 1f);
             }
         }
         if (collectedColor >= 2)
@@ -148,6 +157,7 @@ public class WhilePuzzleManager : MonoBehaviour
         currentRound++;
         CheckWin();
         ResetEachRound();
+        roundSuccess.text = "Round Success: " + currentRound.ToString();
     }
 
     public void CheckWin()
@@ -209,8 +219,8 @@ public class WhilePuzzleManager : MonoBehaviour
         {
             targetColor[color] = false; // Modifying the collection while iterating
         }
-        pickedColor.color = new Color(0f, 0f, 0f,0f);
-        pickedColor.color = new Color(0f, 0f, 0f,0f);
+        pickedColor.color = new Color(0f, 0f, 0f, 0f);
+        pickedColor2.color = new Color(0f, 0f, 0f, 0f);
         PickTargetColor();
     }
 

@@ -1634,7 +1634,7 @@ GameObject:
   - component: {fileID: 188700720}
   - component: {fileID: 188700719}
   m_Layer: 5
-  m_Name: Countdown
+  m_Name: RoundSuccess
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56995,10 +56995,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseTilemap: {fileID: 756239799}
   wallTilemap: {fileID: 883461117}
-  originalPickedColor: {fileID: 1223179415}
-  originalPickedColor2: {fileID: 260493236}
   pickedColor: {fileID: 1223179415}
   pickedColor2: {fileID: 260493236}
+  countdownText: {fileID: 1843559326}
+  roundSuccess: {fileID: 188700719}
   winningRound: 3
   currentRound: 0
   collectedColor: 0
