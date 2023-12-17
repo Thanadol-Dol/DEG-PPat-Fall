@@ -30,14 +30,23 @@ EditorBuildSettings:
     path: Assets/Scenes/DoWhileTower.unity
     guid: f12e486b2284eca43b5b22e5cb06e8ad
   - enabled: 1
+    path: Assets/Scenes/MasterTower.unity
+    guid: 1391d2f47305e1541ad26803367605c6
+  - enabled: 1
     path: Assets/Scenes/Setting.unity
     guid: beb59f56d04a88647aa42e949c3f6b3e
   - enabled: 0
     path: Assets/Scenes/PlayerTest.unity
     guid: 9e87d0c8fab5895418534163890636df
   - enabled: 1
-    path: Assets/Scenes/MasterTower.unity
-    guid: 1391d2f47305e1541ad26803367605c6
+    path: Assets/Scenes/ForEndScene.unity
+    guid: 58797794ad364f640b5f4a487cf85bd5
+  - enabled: 1
+    path: Assets/Scenes/WhileEndScene.unity
+    guid: f706ad87b11e25643bd9aff67d8edae3
+  - enabled: 1
+    path: Assets/Scenes/DoWhileEndScene.unity
+    guid: d63bb0a445d3a5743a27f7f5f96e3ca9
   - enabled: 1
     path: Assets/Scenes/Outro.unity
     guid: 8c1a5e6160baf8748b05a3018e4b0e95

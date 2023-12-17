@@ -349,27 +349,26 @@ public class TowerManager : MonoBehaviour
             if (GameManager.Instance.currentTower == "For")
             {
                 GameManager.Instance.isCompletedForTower = true;
+                GameManager.Instance.currentLevel++;
+                SceneManager.LoadScene("ForEndScene");
             }
             else if (GameManager.Instance.currentTower == "While")
             {
                 GameManager.Instance.isCompletedWhileTower = true;
+                GameManager.Instance.currentLevel++;
+                SceneManager.LoadScene("WhileEndScene");
             }
             else if (GameManager.Instance.currentTower == "DoWhile")
             {
                 GameManager.Instance.isCompletedDoWhileTower = true;
+                GameManager.Instance.currentLevel++;
+                SceneManager.LoadScene("DoWhileEndScene");
             }
             else if (GameManager.Instance.currentTower == "Master")
             {
                 GameManager.Instance.isCompletedMasterTower = true;
-            }
-            GameManager.Instance.currentLevel++;
-            if (GameManager.Instance.isCompletedMasterTower)
-            {
+                GameManager.Instance.currentLevel++;
                 SceneManager.LoadScene("Outro");
-            }
-            else
-            {
-                SceneManager.LoadScene("SelectStage");
             }
         }
     }
@@ -379,27 +378,26 @@ public class TowerManager : MonoBehaviour
         if (GameManager.Instance.currentTower == "For")
         {
             GameManager.Instance.isCompletedForTower = true;
+            GameManager.Instance.currentLevel++;
+            SceneManager.LoadScene("ForEndScene");
         }
         else if (GameManager.Instance.currentTower == "While")
         {
             GameManager.Instance.isCompletedWhileTower = true;
+            GameManager.Instance.currentLevel++;
+            SceneManager.LoadScene("WhileEndScene");
         }
         else if (GameManager.Instance.currentTower == "DoWhile")
         {
             GameManager.Instance.isCompletedDoWhileTower = true;
+            GameManager.Instance.currentLevel++;
+            SceneManager.LoadScene("DoWhileEndScene");
         }
         else if (GameManager.Instance.currentTower == "Master")
         {
             GameManager.Instance.isCompletedMasterTower = true;
-        }
-        GameManager.Instance.currentLevel++;
-        if (GameManager.Instance.isCompletedMasterTower)
-        {
+            GameManager.Instance.currentLevel++;
             SceneManager.LoadScene("Outro");
-        }
-        else
-        {
-            SceneManager.LoadScene("SelectStage");
         }
 
     }
