@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public bool isCompletedMasterTower;
     public int currentLevel;
     public bool isCompletedIntro;
+    public string currentTargetTopic;
     public static GameManager Instance;
 
     //Trap Setup Panel

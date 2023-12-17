@@ -82,6 +82,7 @@ public class Player : MonoBehaviour
         CraftTrap();
         PlaceTrap();
         ToggleTipTrickPanel();
+        ToggleTargetTipTrickPanel();
     }
 
     void PlayerMovement()
@@ -228,5 +229,23 @@ public class Player : MonoBehaviour
         tipTrickPanelCooldown = true;
         yield return new WaitForSeconds(tipTrickPanelCooldownTime);
         tipTrickPanelCooldown = false;
+    }
+
+    void ToggleTargetTipTrickPanel()
+    {
+        string currentTargetTopic = GameManager.Instance.currentTargetTopic;
+        if (currentTargetTopic != "" && !isTrapPanelOpen && !isReadableFilePanelOpen && canvas != null && !tipTrickPanelCooldown)
+        {
+            if (!isTipTrickPanelOpen)
+            {
+                isTipTrickPanelOpen = true;
+                Instantiate(tipTrickPanel, canvas.transform);
+            }
+            else
+            {
+                GameObject.FindGameObjectWithTag("TipTrickPanel").GetComponent<TipTrick>().CloseTipTrickPanel();
+            }
+            StartCoroutine(TipTrickPanelCooldown());
+        }
     }
 }
