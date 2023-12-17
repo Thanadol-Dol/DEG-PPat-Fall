@@ -42,14 +42,14 @@ public class TowerManager : MonoBehaviour
                 trapSetupPanelPrefabs.Add(trapSetupPanel);
             }
         }
-        else if (GameManager.Instance.currentLevel >= 2)
+        if (GameManager.Instance.currentLevel >= 2)
         {
             foreach (GameObject trapSetupPanel in GameManager.Instance.mediumTrapSetupPanel)
             {
                 trapSetupPanelPrefabs.Add(trapSetupPanel);
             }
         }
-        else if (GameManager.Instance.currentLevel >= 3)
+        if (GameManager.Instance.currentLevel >= 3)
         {
             foreach (GameObject trapSetupPanel in GameManager.Instance.hardTrapSetupPanel)
             {
@@ -239,7 +239,6 @@ public class TowerManager : MonoBehaviour
                 Destroy(enemyInstance3);
             }
         }
-
     }
 
     public void StairUp(int StairNumber)
