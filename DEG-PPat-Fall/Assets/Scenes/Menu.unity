@@ -1175,6 +1175,7 @@ MonoBehaviour:
   isCompletedMasterTower: 0
   currentLevel: 0
   isCompletedIntro: 0
+  currentTargetTopic: 
   easyTrapSetupPanel:
   - {fileID: 783336311763434048, guid: 06e7001ffa804204aaa305688c3899ac, type: 3}
   - {fileID: 783336311763434048, guid: f1a6a3b2e1fa7472f80b1be783f20647, type: 3}
@@ -1192,6 +1193,7 @@ MonoBehaviour:
   doWhileTrapSetupPanel: {fileID: 783336311763434048, guid: 2fc694feaf8e24454b18708971f6fc51, type: 3}
   easyReadableFileContent:
   - {fileID: 2542060962807587686, guid: 71c0a2978c44b734e925ab83ca5709bf, type: 3}
+  - {fileID: 2542060962807587686, guid: 0f6103cf91a75874fb6d24f30eb08cf9, type: 3}
   - {fileID: 2542060962807587686, guid: 6ea3387f50e7aae47b88e550b0a3c7f4, type: 3}
   - {fileID: 2542060962807587686, guid: 45d301e9049cac648941514859bd384e, type: 3}
   - {fileID: 2542060962807587686, guid: 3036c4033acafd34389603b09b5a76e7, type: 3}

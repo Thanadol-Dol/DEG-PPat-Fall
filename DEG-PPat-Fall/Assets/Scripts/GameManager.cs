@@ -91,6 +91,7 @@ public class GameManager : MonoBehaviour
         topicConverter.Add("For2","Puzzle Mechanism");
         topicConverter.Add("For3","Information#1");
         topicConverter.Add("For4","Information#2");
+        topicConverter.Add("Easy0","Basic Control");
         topicConverter.Add("Easy1","Basic Condition");
         topicConverter.Add("Easy2","Trap Crarfting");
         topicConverter.Add("Easy3","Trap Placing");
