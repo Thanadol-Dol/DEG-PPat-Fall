@@ -12,8 +12,6 @@ public class WhilePuzzleManager : MonoBehaviour
     public Tilemap baseTilemap;
     public Tilemap wallTilemap;
 
-    public Image originalPickedColor;
-    public Image originalPickedColor2;
     public Image pickedColor;
     public Image pickedColor2;
 
@@ -56,31 +54,31 @@ public class WhilePuzzleManager : MonoBehaviour
         collectedColor++;
         primaryColor[color] = true;
         if(collectedColor == 1){
-            if (primaryColor["Red"])
+            if (color.Equals("Red"))
             {
-                pickedColor.material.color = new Color(255f, 0f, 0f);
+                pickedColor.color = new Color(255f, 0f, 0f,1f);
             }
-            else if (primaryColor["Green"])
+            else if (color.Equals("Green"))
             {
-                pickedColor.material.color = new Color(0f, 255f, 0f);
+                pickedColor.color = new Color(0f, 255f, 0f,1f);
             }
-            else if (primaryColor["Blue"])
+            else if (color.Equals("Blue"))
             {
-                pickedColor.material.color = new Color(0f, 0f, 255f);
+                pickedColor.color = new Color(0f, 0f, 255f,1f);
             }
         }
         if(targetColor["White"] && collectedColor == 2){
-            if (primaryColor["Red"])
+            if (color.Equals("Red"))
             {
-                pickedColor2.material.color = new Color(255f, 0f, 0f);
+                pickedColor2.color = new Color(255f, 0f, 0f,1f);
             }
-            else if (primaryColor["Green"])
+            else if (color.Equals("Green"))
             {
-                pickedColor2.material.color = new Color(0f, 255f, 0f);
+                pickedColor2.color = new Color(0f, 255f, 0f,1f);
             }
-            else if (primaryColor["Blue"])
+            else if (color.Equals("Blue"))
             {
-                pickedColor2.material.color = new Color(0f, 0f, 255f);
+                pickedColor2.color = new Color(0f, 0f, 255f,1f);
             }
         }
         if (collectedColor >= 2)
@@ -211,8 +209,8 @@ public class WhilePuzzleManager : MonoBehaviour
         {
             targetColor[color] = false; // Modifying the collection while iterating
         }
-        pickedColor = originalPickedColor;
-        pickedColor2 = originalPickedColor2;
+        pickedColor.color = new Color(0f, 0f, 0f,0f);
+        pickedColor.color = new Color(0f, 0f, 0f,0f);
         PickTargetColor();
     }
 
