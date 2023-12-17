@@ -16,6 +16,8 @@ public class TowerManager : MonoBehaviour
     private GameObject enemyInstance2;
     private GameObject enemyInstance3;
     private float pickupRange;
+    private bool isCompletedPrologue = false;
+    private bool isCompletedFloor3rd = false;
 
     private bool StairUp1 = false;
     private bool StairUp2 = false;
@@ -67,7 +69,7 @@ public class TowerManager : MonoBehaviour
             trapSetupPanelPrefabs.Add(GameManager.Instance.doWhileTrapSetupPanel);
         }
 
-        DialogControl();
+        
 
         Floors[0].SetActive(true);
         for (int i = 1; i < Floors.Length; i++)
@@ -82,9 +84,9 @@ public class TowerManager : MonoBehaviour
             floorSwitch.Add(false);
         }
         pickupRange = 2.0f;
-
+        TowerStartDialog();
         if(GameManager.Instance.currentLevel == 1){
-            OpenDialog("Easy1");
+            OpenDialog("Easy0");
         }
     }
 
@@ -101,7 +103,7 @@ public class TowerManager : MonoBehaviour
         {
             CompleteTower();
         }
-
+        //checkLevel1Dialog();
         CheckStairClick();
         checkSwitchClick();
     }
@@ -113,6 +115,7 @@ public class TowerManager : MonoBehaviour
         Debug.Log("Switching to next floor");
         NextFloor();
         FindSpawnPoint();
+        checkDialogFloor4th();
     }
 
     private void SetActiveValue(bool value){
@@ -465,7 +468,7 @@ public class TowerManager : MonoBehaviour
             fileNameToContent.Add("DoWhile1","DoWhileNormal1");
             fileNameToContent.Add("DoWhile2","DoWhileNormal2");
             fileNameToContent.Add("DoWhile3","DoWhileNormal3");
-            fileNameToContent.Add("DoWhile4","DoWhileNormal4");   
+            fileNameToContent.Add("DoWhile4","DoWhileNormal4");
         } else {
             fileNameToContent.Add("For1","ForHard1");
             fileNameToContent.Add("For2","ForHard2");
@@ -486,23 +489,60 @@ public class TowerManager : MonoBehaviour
         GameManager.Instance.currentTargetTopic = topic;
     }
 
-    private void DialogControl(){
-        if (GameManager.Instance.currentLevel >= 1)
-        {
-            foreach (GameObject readableFileContent in GameManager.Instance.easyReadableFileContent)
-            {
-                topicList.Add(readableFileContent.name);
+    private void TowerStartDialog(){
+        /*if(GameManager.Instance.currentLevel == 1){
+            topicList.Add(GameManager.Instance.easyReadableFileContent[0].name);
+        }else if(GameManager.Instance.currentLevel >= 2){
+            foreach (GameObject easyReadableFile in GameManager.Instance.easyReadableFileContent){
+                topicList.Add(easyReadableFile.name);
+            }
+            topicList.Add(GameManager.Instance.mediumReadableFileContent.name);
+            if (GameManager.Instance.currentLevel >= 3){
+                topicList.Add(GameManager.Instance.hardReadableFileContent.name);
             }
         }
-        if (GameManager.Instance.currentLevel >= 2)
+        isCompletedPrologue = true;*/
+        if(GameManager.Instance.currentLevel >= 1){
+            foreach (GameObject easyReadableFile in GameManager.Instance.easyReadableFileContent){
+                topicList.Add(easyReadableFile.name);
+            }
+        }
+        if(GameManager.Instance.currentLevel >= 2)
         {
-
             topicList.Add(GameManager.Instance.mediumReadableFileContent.name);
         }
-        if (GameManager.Instance.currentLevel >= 3)
-        {
-
+        if (GameManager.Instance.currentLevel >= 3){
             topicList.Add(GameManager.Instance.hardReadableFileContent.name);
+        }
+    }
+
+    /*private void checkLevel1Dialog(){
+        if(GameManager.Instance.currentLevel == 1 && isCompletedPrologue){
+            for(int i = 1; i < GameManager.Instance.easyReadableFileContent.Count - 1; i++){
+                topicList.Add(GameManager.Instance.easyReadableFileContent[i].name);
+
+            }
+            OpenDialog("Easy1");
+            isCompletedPrologue = false;
+        }
+        
+    }*/
+
+    private void checkDialogFloor4th(){
+        if(GameManager.Instance.currentFloor == 4 && !isCompletedFloor3rd){
+            if(GameManager.Instance.currentTower == "For"){
+                topicList.Add(GameManager.Instance.forReadableFileContent[1].name);
+                OpenDialog("For2");
+            }
+            else if(GameManager.Instance.currentTower == "While"){
+                topicList.Add(GameManager.Instance.whileReadableFileContent[1].name);
+                OpenDialog("While2");
+            }
+            else if(GameManager.Instance.currentTower == "DoWhile"){
+                topicList.Add(GameManager.Instance.doWhileReadableFileContent[1].name);
+                OpenDialog("DoWhile2");
+            }
+            isCompletedFloor3rd = true;
         }
     }
 }
