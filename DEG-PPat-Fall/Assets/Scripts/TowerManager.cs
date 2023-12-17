@@ -10,10 +10,10 @@ public class TowerManager : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
     public GameObject[] Floors;
-    public GameObject[] switchPanelPrefab;
+
     private GameObject playerInstance;
     private GameObject enemyInstance;
-    public float pickupRange;
+    private float pickupRange;
 
     private bool StairUp1 = false;
     private bool StairUp2 = false;
@@ -322,10 +322,9 @@ public class TowerManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             bool isClickable = true;
-            isClickable = CheckStair(Floors[GameManager.Instance.currentFloor].transform.Find("StairUpPoint1"), "Up", 1, mousePosition, isClickable);
-            isClickable = CheckStair(Floors[GameManager.Instance.currentFloor].transform.Find("StairUpPoint2"), "Up", 2, mousePosition, isClickable);
+            isClickable = CheckStair(Floors[GameManager.Instance.currentFloor].transform.Find("StairUpPoint1"), "Up", 1, isClickable);
+            isClickable = CheckStair(Floors[GameManager.Instance.currentFloor].transform.Find("StairUpPoint2"), "Up", 2, isClickable);
 
             //isClickable = CheckStair(Floors[GameManager.Instance.currentFloor].transform.Find("StairDownPoint1"), "Down", 1, mousePosition, isClickable);
             //isClickable = CheckStair(Floors[GameManager.Instance.currentFloor].transform.Find("StairDownPoint2"), "Down", 2, mousePosition, isClickable);
@@ -334,7 +333,7 @@ public class TowerManager : MonoBehaviour
         }
     }
 
-    public bool CheckStair(Transform stairTransform, string StairDirection, int stairNumber, Vector3 mousePosition, bool isClickable)
+    public bool CheckStair(Transform stairTransform, string StairDirection, int stairNumber, bool isClickable)
     {
         if (isClickable == false)
         {
@@ -365,7 +364,6 @@ public class TowerManager : MonoBehaviour
                     StairDown(stairNumber);
                 }*/
             }
-            return false;
         }
         return true;
     }
@@ -397,7 +395,7 @@ public class TowerManager : MonoBehaviour
 
                 if (disPlayer_Switch <= pickupRange)
                 {
-                    ShowSwitchPanel();
+                    SwitchCompleted();
                     Debug.Log("Switch Completed!");
                 }
 
@@ -406,37 +404,6 @@ public class TowerManager : MonoBehaviour
         }
     }
 
-    private void ShowSwitchPanel()
-    {
-        if (switchPanelPrefab != null)
-        {
-            GameObject canvas = GameObject.Find("Canvas");
-            if (canvas != null)
-            {
-                // Instantiate a unique panel for each trap
-                GameObject switchPanel = Instantiate(switchPanelPrefab[GameManager.Instance.currentFloor], canvas.transform);
-
-                // Pass a reference to the trap to the panel
-                //SwitchPanel panelScript = switchPanel.GetComponent<SwitchPanel>();
-                // if (panelScript != null)
-                // {
-                //     //panelScript.SetTrapReference(this);
-                // }
-                // else
-                // {
-                //     Debug.LogError("switchPanel script not found on the panel prefab.");
-                // }
-            }
-            else
-            {
-                Debug.LogError("Canvas not found in the scene.");
-            }
-        }
-        else
-        {
-            Debug.LogError("Switch panel prefab is not assigned in the inspector.");
-        }
-    }
 
     public void ChangeFloorSwitch()
     {
