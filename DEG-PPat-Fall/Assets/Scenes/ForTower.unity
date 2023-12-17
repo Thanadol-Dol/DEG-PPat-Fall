@@ -50351,8 +50351,6 @@ MonoBehaviour:
   - {fileID: 1982913418}
   - {fileID: 908064129}
   - {fileID: 986444483}
-  switchPanelPrefab: []
-  pickupRange: 0
   trapSetupPanelPrefabs: []
   topicList: []
 --- !u!1 &1378464373

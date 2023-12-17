@@ -13,12 +13,12 @@ public class TowerManager : MonoBehaviour
 
     private GameObject playerInstance;
     private GameObject enemyInstance;
+    private GameObject enemyInstance2;
+    private GameObject enemyInstance3;
     private float pickupRange;
 
     private bool StairUp1 = false;
     private bool StairUp2 = false;
-    //private bool StairDown1 = false;
-    //private bool StairDown2 = false;
     private List<bool> floorSwitch = new List<bool>();
     public List<GameObject> trapSetupPanelPrefabs = new List<GameObject>();
     public List<string> topicList = new List<string>();
@@ -126,15 +126,6 @@ public class TowerManager : MonoBehaviour
         FindSpawnPoint();
     }
 
-    public void goPreviousFloor()
-    {
-        DestroyPlayerAndEnemy();
-        CheckCompletedTower();
-        Debug.Log("Switching to previous floor");
-        previousFloor();
-        FindSpawnPoint();
-    }
-
     private void SetActiveValue(bool value){
         GameObject currentFloor = Floors[GameManager.Instance.currentFloor];
         Transform SU1 = currentFloor.transform.Find("StairUpActive1");
@@ -149,9 +140,6 @@ public class TowerManager : MonoBehaviour
         if(SA != null){
             SA.gameObject.SetActive(value);
         }
-        //Floors[GameManager.Instance.currentFloor].Find("StairUpActive2");
-        //Floors[GameManager.Instance.currentFloor].Find("SwitchActiveTilemap");
-
     }
 
     private void NextFloor()
@@ -173,25 +161,6 @@ public class TowerManager : MonoBehaviour
         }
     }
 
-    private void previousFloor()
-    {
-        /*if (GameManager.Instance.currentFloor > 0)
-        {
-            Debug.Log("Current Floor : " + GameManager.Instance.currentFloor);
-            Floors[GameManager.Instance.currentFloor].SetActive(false);
-            Floors[GameManager.Instance.currentFloor].GetComponent<Floor>().ClearTilemaps();
-            GameManager.Instance.currentFloor--;
-            Debug.Log("Current Floor : " + GameManager.Instance.currentFloor);
-            Floors[GameManager.Instance.currentFloor].SetActive(true);
-            Floors[GameManager.Instance.currentFloor].GetComponent<Floor>().SetupTilemaps();
-            
-        }
-        else
-        {
-            Debug.Log("No more floors!");
-        }*/
-    }
-
     public void FindSpawnPoint()
     {
         if (GameManager.Instance.currentFloor >= 0 && GameManager.Instance.currentFloor < Floors.Length)
@@ -205,8 +174,6 @@ public class TowerManager : MonoBehaviour
                 }
                 StairUp1 = false;
                 StairUp2 = false;
-                //StairDown1 = false;
-                //StairDown2 = false;
             }
             else
             {
@@ -228,23 +195,6 @@ public class TowerManager : MonoBehaviour
                         playerInstance = Instantiate(playerPrefab, playerSpawnPoint.position, Quaternion.identity);
                     }
                     StairUp2 = false;
-                    /*}
-                    else if(StairDown1 == true){
-                        if(Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawnD1") != null)
-                        {
-                            Transform playerSpawnPoint = Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawnD1");
-                            playerInstance = Instantiate(playerPrefab, playerSpawnPoint.position, Quaternion.identity);
-                        }
-                        StairDown1 = false;
-                    }
-                    else if (StairDown2 == true)
-                    {
-                        if (Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawnD2") != null)
-                        {
-                            Transform playerSpawnPoint = Floors[GameManager.Instance.currentFloor].transform.Find("PlayerSpawnD2");
-                            playerInstance = Instantiate(playerPrefab, playerSpawnPoint.position, Quaternion.identity);
-                        }
-                        StairDown2 = false;*/
                 }
                 else
                 {
@@ -261,6 +211,18 @@ public class TowerManager : MonoBehaviour
                 Transform enemySpawnPoint = Floors[GameManager.Instance.currentFloor].transform.Find("EnemySpawn");
                 enemyInstance = Instantiate(enemyPrefab, enemySpawnPoint.position, Quaternion.identity);
             }
+
+            if (Floors[GameManager.Instance.currentFloor].transform.Find("EnemySpawn2") != null)
+            {
+                Transform enemySpawnPoint = Floors[GameManager.Instance.currentFloor].transform.Find("EnemySpawn2");
+                enemyInstance2 = Instantiate(enemyPrefab, enemySpawnPoint.position, Quaternion.identity);
+            }
+
+            if (Floors[GameManager.Instance.currentFloor].transform.Find("EnemySpawn3") != null)
+            {
+                Transform enemySpawnPoint = Floors[GameManager.Instance.currentFloor].transform.Find("EnemySpawn3");
+                enemyInstance3 = Instantiate(enemyPrefab, enemySpawnPoint.position, Quaternion.identity);
+            }
         }
     }
 
@@ -275,6 +237,14 @@ public class TowerManager : MonoBehaviour
             if (enemyInstance != null)
             {
                 Destroy(enemyInstance);
+            }
+            if (enemyInstance2 != null)
+            {
+                Destroy(enemyInstance2);
+            }
+            if (enemyInstance3 != null)
+            {
+                Destroy(enemyInstance3);
             }
         }
 
@@ -301,22 +271,6 @@ public class TowerManager : MonoBehaviour
 
     }
 
-    /*public void StairDown(int StairNumber)
-    {
-        if (GameManager.Instance.currentFloor > 0)
-        {
-            if (StairNumber == 1)
-            {
-                StairDown1 = true;
-            }
-            else if (StairNumber == 2)
-            {
-                StairDown2 = true;
-            }
-            goPreviousFloor();
-        }
-        
-    }*/
 
     public void CheckStairClick()
     {
@@ -325,10 +279,6 @@ public class TowerManager : MonoBehaviour
             bool isClickable = true;
             isClickable = CheckStair(Floors[GameManager.Instance.currentFloor].transform.Find("StairUpPoint1"), "Up", 1, isClickable);
             isClickable = CheckStair(Floors[GameManager.Instance.currentFloor].transform.Find("StairUpPoint2"), "Up", 2, isClickable);
-
-            //isClickable = CheckStair(Floors[GameManager.Instance.currentFloor].transform.Find("StairDownPoint1"), "Down", 1, mousePosition, isClickable);
-            //isClickable = CheckStair(Floors[GameManager.Instance.currentFloor].transform.Find("StairDownPoint2"), "Down", 2, mousePosition, isClickable);
-
 
         }
     }
@@ -344,10 +294,6 @@ public class TowerManager : MonoBehaviour
         {
 
             Vector3 stairPosition = stairTransform.position;
-            /*float disPlayer_Mouse = Vector3.Distance(playerInstance.transform.position, mousePosition);
-            if(disPlayer_Mouse >= 2.0f){
-                return true;
-            }*/
             Debug.Log("Click!" + StairDirection);
             float disPlayer_Stair = Vector3.Distance(playerInstance.transform.position, stairPosition);
 
@@ -358,11 +304,6 @@ public class TowerManager : MonoBehaviour
                     Debug.Log("StairUp!");
                     StairUp(stairNumber);
                 }
-                /*else if (StairDirection == "Down")
-                {
-                    Debug.Log("StairDown!");
-                    StairDown(stairNumber);
-                }*/
             }
         }
         return true;
@@ -386,11 +327,8 @@ public class TowerManager : MonoBehaviour
         {
             if (Floors[GameManager.Instance.currentFloor].transform.Find("Switch") != null)
             {
-                //Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+               
                 Vector3 switchPosition = Floors[GameManager.Instance.currentFloor].transform.Find("Switch").position;
-
-                //float disPlayer_Mouse = Vector3.Distance(playerInstance.transform.position, mousePosition);
-                //if(disPlayer_Mouse <= 1.0f){
                 float disPlayer_Switch = Vector3.Distance(playerInstance.transform.position, switchPosition);
 
                 if (disPlayer_Switch <= pickupRange)
@@ -398,8 +336,6 @@ public class TowerManager : MonoBehaviour
                     SwitchCompleted();
                     Debug.Log("Switch Completed!");
                 }
-
-                //}
             }
         }
     }
