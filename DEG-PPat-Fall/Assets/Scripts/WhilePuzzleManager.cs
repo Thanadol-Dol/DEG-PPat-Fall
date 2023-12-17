@@ -1,13 +1,21 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class WhilePuzzleManager : MonoBehaviour
 {
     public Dictionary<string, bool> primaryColor = new Dictionary<string, bool>();
     public Dictionary<string, bool> targetColor = new Dictionary<string, bool>();
+    public Tilemap baseTilemap;
+    public Tilemap wallTilemap;
+
+    public Image originalPickedColor;
+    public Image originalPickedColor2;
+    public Image pickedColor;
+    public Image pickedColor2;
 
     public int winningRound = 3;
 
@@ -26,15 +34,13 @@ public class WhilePuzzleManager : MonoBehaviour
         targetColor.Add("Yellow", false);
         targetColor.Add("LightBlue", false);
         targetColor.Add("White", false);
-        PickTargetColor();
-        countdownCoroutine = StartCoroutine(StartCountdown());
+        ResetGame();
     }
 
     private IEnumerator StartCountdown()
     {
         while (countdownTime > 0)
         {
-            UpdateCountdownLog();
             yield return new WaitForSeconds(1f);
             countdownTime--;
         }
@@ -44,17 +50,39 @@ public class WhilePuzzleManager : MonoBehaviour
         ResetGame();
     }
 
-    private void UpdateCountdownLog()
-    {
-        int minutes = Mathf.FloorToInt(countdownTime / 60);
-        int seconds = Mathf.FloorToInt(countdownTime % 60);
-    }
-
     // Start is called before the first frame update
     public void CollectColor(string color)
     {
         collectedColor++;
         primaryColor[color] = true;
+        if(collectedColor == 1){
+            if (primaryColor["Red"])
+            {
+                pickedColor.material.color = new Color(255f, 0f, 0f);
+            }
+            else if (primaryColor["Green"])
+            {
+                pickedColor.material.color = new Color(0f, 255f, 0f);
+            }
+            else if (primaryColor["Blue"])
+            {
+                pickedColor.material.color = new Color(0f, 0f, 255f);
+            }
+        }
+        if(targetColor["White"] && collectedColor == 2){
+            if (primaryColor["Red"])
+            {
+                pickedColor2.material.color = new Color(255f, 0f, 0f);
+            }
+            else if (primaryColor["Green"])
+            {
+                pickedColor2.material.color = new Color(0f, 255f, 0f);
+            }
+            else if (primaryColor["Blue"])
+            {
+                pickedColor2.material.color = new Color(0f, 0f, 255f);
+            }
+        }
         if (collectedColor >= 2)
         {
             CheckRound();
@@ -73,7 +101,7 @@ public class WhilePuzzleManager : MonoBehaviour
             else
             {
                 Debug.Log("Wrong!");
-                StartCoroutine(DelayedResetGame());
+                ResetGame();
             }
         }
         else if (targetColor["Yellow"])
@@ -86,7 +114,7 @@ public class WhilePuzzleManager : MonoBehaviour
             else
             {
                 Debug.Log("Wrong!");
-                StartCoroutine(DelayedResetGame());
+                ResetGame();
             }
         }
         else if (targetColor["LightBlue"])
@@ -99,7 +127,7 @@ public class WhilePuzzleManager : MonoBehaviour
             else
             {
                 Debug.Log("Wrong!");
-                StartCoroutine(DelayedResetGame());
+                ResetGame();
             }
         }
         else if (targetColor["White"] && collectedColor == 3)
@@ -112,24 +140,16 @@ public class WhilePuzzleManager : MonoBehaviour
             else
             {
                 Debug.Log("Wrong!");
-                StartCoroutine(DelayedResetGame());
+                ResetGame();
             }
         }
-        CheckWin();
-    }
-
-    private IEnumerator DelayedResetGame()
-    {
-        yield return new WaitForSeconds(1f); // Adjust the delay time as needed
-        StopCoroutine(countdownCoroutine);  // Stop the existing countdown coroutine
-        ResetGame();
     }
 
     public void ToNextRound()
     {
         currentRound++;
+        CheckWin();
         ResetEachRound();
-        PickTargetColor();
     }
 
     public void CheckWin()
@@ -149,7 +169,28 @@ public class WhilePuzzleManager : MonoBehaviour
         string randomColorKey = colorKeys[UnityEngine.Random.Range(0, colorKeys.Length)];
 
         // Toggle the value of the randomly chosen color
-        targetColor[randomColorKey] = !targetColor[randomColorKey];
+        targetColor[randomColorKey] = true;
+
+        if (targetColor["Violet"])
+        {
+            baseTilemap.color = new Color(255f, 0f, 255f);
+            wallTilemap.color = new Color(255f, 0f, 255f);
+        }
+        else if (targetColor["Yellow"])
+        {
+            baseTilemap.color = new Color(255f, 255f, 0f);
+            wallTilemap.color = new Color(255f, 255f, 0f);
+        }
+        else if (targetColor["LightBlue"])
+        {
+            baseTilemap.color = new Color(0f, 255f, 255f);
+            wallTilemap.color = new Color(0f, 255f, 255f);
+        }
+        else if (targetColor["White"])
+        {
+            baseTilemap.color = new Color(255f, 255f, 255f);
+            wallTilemap.color = new Color(255f, 255f, 255f);
+        }
 
         Debug.Log("Picked target color: " + randomColorKey + ", Value toggled: " + targetColor[randomColorKey]);
     }
@@ -170,6 +211,8 @@ public class WhilePuzzleManager : MonoBehaviour
         {
             targetColor[color] = false; // Modifying the collection while iterating
         }
+        pickedColor = originalPickedColor;
+        pickedColor2 = originalPickedColor2;
         PickTargetColor();
     }
 
@@ -179,6 +222,15 @@ public class WhilePuzzleManager : MonoBehaviour
         currentRound = 0;
         countdownTime = 120f;
         ResetEachRound();
+
+        // Stop the existing coroutine before starting a new one
+        if (countdownCoroutine != null)
+        {
+            StopCoroutine(countdownCoroutine);
+        }
+
         countdownCoroutine = StartCoroutine(StartCountdown());  // Start a new countdown coroutine
+        Debug.Log("Game Reset!");
     }
+
 }
