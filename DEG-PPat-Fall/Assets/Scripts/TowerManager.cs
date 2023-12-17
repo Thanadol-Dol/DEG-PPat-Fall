@@ -406,6 +406,7 @@ public class TowerManager : MonoBehaviour
     public void AddTopic(string topic)
     {
         topicList.Add(topic);
+        OpenDialog(topic);
     }
 
     public void ListAllFilePuzzle()
@@ -531,15 +532,21 @@ public class TowerManager : MonoBehaviour
     private void checkDialogFloor4th(){
         if(GameManager.Instance.currentFloor == 4 && !isCompletedFloor3rd){
             if(GameManager.Instance.currentTower == "For"){
-                topicList.Add(GameManager.Instance.forReadableFileContent[1].name);
+                if(!topicList.Contains(GameManager.Instance.forReadableFileContent[1].name)){
+                    topicList.Add(GameManager.Instance.forReadableFileContent[1].name);
+                }
                 OpenDialog("For2");
             }
             else if(GameManager.Instance.currentTower == "While"){
-                topicList.Add(GameManager.Instance.whileReadableFileContent[1].name);
+                if(!topicList.Contains(GameManager.Instance.whileReadableFileContent[1].name)){
+                    topicList.Add(GameManager.Instance.whileReadableFileContent[1].name);
+                }
                 OpenDialog("While2");
             }
             else if(GameManager.Instance.currentTower == "DoWhile"){
-                topicList.Add(GameManager.Instance.doWhileReadableFileContent[1].name);
+                if(!topicList.Contains(GameManager.Instance.doWhileReadableFileContent[1].name)){
+                    topicList.Add(GameManager.Instance.doWhileReadableFileContent[1].name);
+                }
                 OpenDialog("DoWhile2");
             }
             isCompletedFloor3rd = true;
