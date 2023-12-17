@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: CF-Switch2
+  m_Name: Final-Switch2
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: cc4185814afaf0a4cad723d7fab99b42, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 350a46c74342e35408e6b2aab61d69be, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

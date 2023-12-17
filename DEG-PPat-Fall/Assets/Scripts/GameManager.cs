@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> doWhileReadableFilePanelHard = new List<GameObject>();
     public List<GameObject> allReadableFilePanel = new List<GameObject>();
     public Dictionary<string, string> topicConverter = new Dictionary<string, string>();
+    
     void Awake(){
         allReadableFileContent.AddRange(easyReadableFileContent);
         allReadableFileContent.Add(mediumReadableFileContent);
