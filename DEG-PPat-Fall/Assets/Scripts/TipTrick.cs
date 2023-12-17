@@ -32,6 +32,11 @@ public class TipTrick : MonoBehaviour
                 Debug.LogError("Button Component not found");
             }
         }
+        if(GameManager.Instance.currentTargetTopic != "")
+        {
+            OpenContentPanel(GameManager.Instance.currentTargetTopic);
+        }
+
     }
 
     public void CloseTipTrickPanel()
@@ -47,11 +52,13 @@ public class TipTrick : MonoBehaviour
                 Destroy(panel);
             }
         }
+        GameManager.Instance.currentTargetTopic = "";
         Time.timeScale = 1f;
     }
 
     public void OpenContentPanel(string topic)
     {
+        
         Debug.Log("OpenContentPanel called");
         Transform canvasTransform = GameObject.Find("Canvas").transform;
         if (newContentPanel != null)

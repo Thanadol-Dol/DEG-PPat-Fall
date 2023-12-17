@@ -28,8 +28,10 @@ public class TowerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameManager.Instance.currentTargetTopic = "";
         FileNameToContent();
         ListAllFilePuzzle();
+        
         //Trap Setup Panel
         if (GameManager.Instance.currentLevel >= 1)
         {
@@ -64,25 +66,8 @@ public class TowerManager : MonoBehaviour
         {
             trapSetupPanelPrefabs.Add(GameManager.Instance.doWhileTrapSetupPanel);
         }
-        
-        //Readable File
-        if (GameManager.Instance.currentLevel >= 1)
-        {
-            foreach (GameObject readableFileContent in GameManager.Instance.easyReadableFileContent)
-            {
-                topicList.Add(readableFileContent.name);
-            }
-        }
-        if (GameManager.Instance.currentLevel >= 2)
-        {
 
-            topicList.Add(GameManager.Instance.mediumReadableFileContent.name);
-        }
-        if (GameManager.Instance.currentLevel >= 3)
-        {
-
-            topicList.Add(GameManager.Instance.hardReadableFileContent.name);
-        }
+        DialogControl();
 
         Floors[0].SetActive(true);
         for (int i = 1; i < Floors.Length; i++)
@@ -92,17 +77,21 @@ public class TowerManager : MonoBehaviour
         SetActiveValue(false);
         FindSpawnPoint();
 
-
         for (int i = 0; i < Floors.Length; i++)
         {
             floorSwitch.Add(false);
         }
         pickupRange = 2.0f;
+
+        if(GameManager.Instance.currentLevel == 1){
+            OpenDialog("Easy1");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.O))
         {
             goNextFloor();
@@ -489,7 +478,31 @@ public class TowerManager : MonoBehaviour
             fileNameToContent.Add("DoWhile1","DoWhileHard1");
             fileNameToContent.Add("DoWhile2","DoWhileHard2");
             fileNameToContent.Add("DoWhile3","DoWhileHard3");
-            fileNameToContent.Add("DoWhile4","DoWhileHard4");   
+            fileNameToContent.Add("DoWhile4","DoWhileHard4");
+        }
+    }
+
+    private void OpenDialog(string topic){
+        GameManager.Instance.currentTargetTopic = topic;
+    }
+
+    private void DialogControl(){
+        if (GameManager.Instance.currentLevel >= 1)
+        {
+            foreach (GameObject readableFileContent in GameManager.Instance.easyReadableFileContent)
+            {
+                topicList.Add(readableFileContent.name);
+            }
+        }
+        if (GameManager.Instance.currentLevel >= 2)
+        {
+
+            topicList.Add(GameManager.Instance.mediumReadableFileContent.name);
+        }
+        if (GameManager.Instance.currentLevel >= 3)
+        {
+
+            topicList.Add(GameManager.Instance.hardReadableFileContent.name);
         }
     }
 }
