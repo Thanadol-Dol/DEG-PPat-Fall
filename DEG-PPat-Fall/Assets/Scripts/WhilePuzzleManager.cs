@@ -46,7 +46,7 @@ public class WhilePuzzleManager : MonoBehaviour
             countdownTime -= 0.1f;  // Update the countdown time more frequently
 
             // Update countdownText during the countdown
-            countdownText.text = "Time: " + Mathf.Ceil(countdownTime).ToString();  // Round up to the nearest second for display
+            countdownText.text = "Timeout: " + Mathf.Ceil(countdownTime).ToString() + " Seconds";  // Round up to the nearest second for display
         }
 
         // Countdown has reached zero, you can handle the event here
@@ -157,7 +157,7 @@ public class WhilePuzzleManager : MonoBehaviour
         currentRound++;
         CheckWin();
         ResetEachRound();
-        roundSuccess.text = "Round Success: " + currentRound.ToString();
+        roundSuccess.text = "Round Success: " + currentRound.ToString() + " / " + winningRound.ToString();
     }
 
     public void CheckWin()
@@ -229,6 +229,7 @@ public class WhilePuzzleManager : MonoBehaviour
     {
         currentRound = 0;
         countdownTime = 120f;
+        roundSuccess.text = "Round Success: " + currentRound.ToString() + " / " + winningRound.ToString();
         ResetEachRound();
 
         // Stop the existing coroutine before starting a new one

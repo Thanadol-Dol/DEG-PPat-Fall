@@ -24,7 +24,6 @@ public class ReadableFile : MonoBehaviour
 
     private IEnumerator WaitForTowerManagerInitialization()
     {
-
         while (towerManager == null)
         {
             towerManager = GameObject.Find("TowerManager")?.GetComponent<TowerManager>();
